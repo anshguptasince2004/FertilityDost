@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(204, 241, 255);
+}
+
+body {
+  background-color: #eaf6ff;
+}
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.header, .footer {
+  width: 100%;
+}

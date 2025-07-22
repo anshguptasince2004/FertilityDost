@@ -1,0 +1,82 @@
+.bottom-members-wrapper {
+  background: #f7fdf9;
+}
+
+.bottom-core-card {
+  min-width: 220px;
+  max-width: 250px;
+  height: 320px;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: all 0.4s ease;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.bottom-core-card.focused {
+  filter: blur(0);
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+.bottom-core-card.blurred {
+  filter: blur(2px);
+  transform: scale(0.95);
+  opacity: 0.6;
+}
+
+.bottom-card-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.bottom-member-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bottom-text-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  padding: 0.75rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
+  text-align: center;
+}
+
+.bottom-text-overlay h6 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.bottom-text-overlay p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.fade-left,
+.fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.fade-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.85), transparent);
+}
+
+.fade-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.85), transparent);
+}

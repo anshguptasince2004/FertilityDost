@@ -1,0 +1,16 @@
+.bg-light-blue {
+  background-color: #f1faff;
+  position: relative;
+  overflow: hidden;
+}
+.friend {
+  font-weight: 450;
+  font-size: 1.1rem;
+}
+
+.text {
+  color: #0c3a84;
+}
+.text-muted {
+  color: #92989e !important;
+}

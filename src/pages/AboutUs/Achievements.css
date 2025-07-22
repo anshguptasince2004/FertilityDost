@@ -1,0 +1,62 @@
+.achievements-wrapper {
+  font-family: "Poppins", sans-serif;
+}
+
+.bg-pink {
+  background-color: #ffececff;
+}
+
+/* Awards Section */
+.award-card {
+  width: 100%;
+  max-width: 200px;
+  transition: box-shadow 0.2s ease, transform 0.3s ease;
+  border-radius: 12px;
+  border: none;
+}
+
+.award-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.award-img {
+  max-height: 110px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+.grayscale-img {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* Press & Recognition Section */
+.press-card {
+  background-color: #ffececff;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: 10px;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.press-card:hover {
+  background-color: #fff;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.active {
+  background-color: #99c9af;
+}

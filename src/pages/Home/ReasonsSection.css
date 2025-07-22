@@ -1,0 +1,58 @@
+.infertility-reasons-section{
+  background-color: #ffffff;
+  padding-left: 10%;
+}
+
+.reason-number {
+  background-color: #ffffff;
+  color: #0c3e91;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+.reason-title {
+  display: inline-block;
+  border-bottom: 3px solid #45c1ff;
+  padding-bottom: 15px;
+  margin-bottom: 8px;
+}
+
+.reason-badge {
+  position: absolute;
+  top: 20px;
+  left: -30px;
+  background-color: #a8dbff;
+  color: #064185;
+  font-weight: 550;
+  padding: 10px 17px;
+  border-radius: 50%;
+  border: white 5px solid;
+  font-size: 2.2rem;
+}
+.reason-badge1 {
+  position: absolute;
+  top: 20px;
+  right: 110px;
+  background-color: #a8dbff;
+  color: #064185;
+  font-weight:550;
+  padding: 10px 17px;
+  border-radius: 50%;
+  border: white 5px solid;
+  font-size: 2.2rem;
+}
+
+.reason-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 16px;
+}
+
+.struggle-text {
+  background-color: #ffffff;
+}

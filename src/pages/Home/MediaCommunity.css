@@ -1,0 +1,39 @@
+.bg-light-blue {
+    background-color: #f4fbff;
+}
+
+.grayscale-img {
+    filter: grayscale(100%);
+}
+
+.carousel-card {
+    max-width: 500px;
+    min-height: 150px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.05);
+}
+
+.body5-section {
+    background-color: white;
+}
+
+/* Circular Indicators
+.custom-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.custom-carousel-indicators button {
+    width: 1px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background-color: #d1d1d1 !important;
+    margin: 4px !important;
+    opacity: 1 !important;
+}
+
+.custom-carousel-indicators .active {
+    background-color: #012255 !important; or your primary color
+} */

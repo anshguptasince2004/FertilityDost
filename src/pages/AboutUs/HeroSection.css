@@ -1,0 +1,61 @@
+.about-section {
+  background: linear-gradient(135deg, #ae2746, #b7415e);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: auto;
+}
+
+
+.text-content h2 {
+  font-size: 2.8rem;
+  font-weight: 400;
+  padding-left: 15%;
+}
+
+.text-content p {
+  font-size: 1.1rem;
+  max-width: 90%;
+  padding-left: 15%;
+  margin-bottom: 20%;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.about-image {
+  height: 100%;
+  max-height: 500px;
+  width: auto;
+  object-fit: contain;
+  margin-right: 20%;
+}
+
+.curve-shape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  line-height: 0;
+  z-index: 1;
+}
+
+
+
+@media (max-width: 768px) {
+  .text-content {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .about-image {
+    max-height: 300px;
+    width: 100%;
+    height: auto;
+  }
+}

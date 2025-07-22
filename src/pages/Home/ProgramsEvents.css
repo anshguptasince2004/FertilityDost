@@ -1,0 +1,29 @@
+.body3-section .card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.body3-section img {
+  object-fit: cover;
+  height: 200px;
+}
+
+.btn-primary {
+  background-color: rgb(34, 53, 148);
+}
+.btn-outline-primary {
+  border: none;
+  color: rgb(34, 53, 148);
+  background-color: rgb(238, 247, 255);
+}
+.card-body ul li {
+  margin-bottom: 0.5rem;
+}
+
+.body3-section {
+  background-color: white;
+}
+.Events-section {
+  margin-top: 50px;
+
+}
