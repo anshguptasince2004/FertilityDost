@@ -8,7 +8,7 @@ import { MdEmail } from "react-icons/md";
 import m1 from "../assets/Experts/GoogleBadge.png";
 import m2 from "../assets/Experts/AppStore.png";
 
-import "./Footer.css";
+import "./layout.css";
 
 function Footer() {
   const { theme } = useTheme();

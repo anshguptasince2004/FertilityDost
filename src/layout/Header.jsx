@@ -1,5 +1,4 @@
 import { Link, NavLink } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTheme } from '../Context/ThemeContext';
 
 function Header() {
