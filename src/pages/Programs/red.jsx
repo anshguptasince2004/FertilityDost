@@ -1,7 +1,7 @@
 import React from "react";
 // import "./red.css";
 import { motion } from "framer-motion";
-import enrollImg from "../../assets/Programs/Rectangleimage.png";
+import enrollImg from "../../assets/Programs/RectangleImage.png";
 import bgPattern from "../../assets/Programs/red.png";
 
 const EnrollProgram = () => {
