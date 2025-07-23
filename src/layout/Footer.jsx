@@ -5,8 +5,8 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 
-import m1 from "../Assets/Experts/GoogleBadge.png";
-import m2 from "../Assets/Experts/AppStore.png";
+import m1 from "../assets/Experts/GoogleBadge.png";
+import m2 from "../assets/Experts/AppStore.png";
 
 import "./Footer.css";
 
