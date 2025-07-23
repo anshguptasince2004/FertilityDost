@@ -17,3 +17,6 @@
 .google, .apple {
   width: 85%;
 }
+.text-center {
+  margin-bottom: 1.5rem !important;
+}

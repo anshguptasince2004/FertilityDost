@@ -14,7 +14,7 @@ function Footer() {
   const { theme } = useTheme();
 
   return (
-    <footer className="text-light pt-5 pb-4" style={{ backgroundColor: theme.footerColor }}>
+    <footer className="text-light pt-5" style={{ backgroundColor: theme.footerColor }}>
       <div className="container">
         <div className="row mb-4">
 
