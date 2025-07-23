@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import coupleImg from "../../assets/Programs/couple.png";
-import mobileImg from "../../assets/Programs/mobile.png";
+import mobileImg from "../../assets/Programs/Mobile.png";
 import mainDoctor from "../../assets/Programs/docterMain.png";
 import doc1 from "../../assets/Programs/docter1.png";
 import doc2 from "../../assets/Programs/docter2.png";
