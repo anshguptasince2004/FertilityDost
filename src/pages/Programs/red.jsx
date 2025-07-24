@@ -3,8 +3,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import enrollImg from "../../assets/Programs/RectangleImage.png";
 import bgPattern from "../../assets/Programs/red.png";
+import EnrollModal from "../../components/EnrollModel";
+import { useState } from "react";
+
 
 const EnrollProgram = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <section
       className="enroll-section d-flex align-items-center"
@@ -39,9 +43,11 @@ const EnrollProgram = () => {
               <span className="original-price">Rs 7999/-</span>
               <span className="discounted-price ms-3">Rs 6999/-</span>
             </div>
-            <button className="btn btn-success px-4 py-2 fw-semibold rounded-pill shadow-sm">
+            <button className="enroll-btn btn btn-success px-4 py-2 fw-semibold rounded-pill shadow-sm" onClick={() => setShowModal(true)}>
               Enroll Program Now
             </button>
+            <EnrollModal isOpen={showModal} onClose={() => setShowModal(false)} />
+
           </motion.div>
         </div>
       </div>
