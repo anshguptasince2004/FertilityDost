@@ -18,7 +18,7 @@ function App() {
   const language = "English";
   return (
     <ThemeProvider>
-        <Fragment className="app-wrapper">
+        <div className="app-wrapper">
           <BrowserRouter>
             <Header />
             <main className='flex-grow-1'>
@@ -35,7 +35,7 @@ function App() {
             </main>
             <Footer />
           </BrowserRouter>
-        </Fragment>
+        </div>
     </ThemeProvider>
   );
 }
