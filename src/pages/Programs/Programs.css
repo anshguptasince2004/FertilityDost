@@ -672,6 +672,11 @@
     font-size: 14px;
     padding: 4px 12px;
   }
+  
+  .expert-left-text {
+    text-align: center;
+    margin-right: 30%;
+  }
 
   .right-content h4 {
     font-size: 18px;
