@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Fragment } from 'react';
 
 import Header from './layout/Header';
 import Footer from './layout/Footer';
@@ -17,7 +18,7 @@ function App() {
   const language = "English";
   return (
     <ThemeProvider>
-        <div className="app-wrapper">
+        <Fragment className="app-wrapper">
           <BrowserRouter>
             <Header />
             <main className='flex-grow-1'>
@@ -34,7 +35,7 @@ function App() {
             </main>
             <Footer />
           </BrowserRouter>
-        </div>
+        </Fragment>
     </ThemeProvider>
   );
 }
