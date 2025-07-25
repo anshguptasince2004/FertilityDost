@@ -9,7 +9,7 @@ function HeroSection() {
                     <div className="col-md-6 text-light text-content">
                         <h2 className="mb-3">Know About <br />Fertility Dost</h2>
                         <p className="lead">
-                            Contrary to popular belief, Lorem Ipsum <br /> is not simply random text. It has roots in a <br /> piece of classical Latin literature.
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature.
                         </p>
                     </div>
                     <div className="col-md-6 image-container">

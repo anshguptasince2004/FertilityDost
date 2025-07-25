@@ -1,7 +1,8 @@
-.appointment-wrapper {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 15px;
+.appointment-wrapper p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
 .main-heading {
@@ -9,16 +10,21 @@
   color: #000;
   font-size: 1.8rem;
   line-height: 1.5;
+  margin-bottom: 0;
 }
 
 .text-pink {
   color: #f06292;
 }
 
+.image {
+  margin-bottom: 0 !important;
+  margin-top: 0;
+}
 .dna-frame {
   position: relative;
   display: inline-block;
-  padding: 20px;
+  /* padding: 20px; */
   max-width: 400px;
   width: 100%;
 }
@@ -51,19 +57,56 @@
   .main-heading {
     font-size: 1.4rem;
   }
+
+  .appointment-wrapper {
+    padding: 0 10px;
+  }
 }
 
-.animated-btn {
-  padding: 12px 32px;
-  border: none;
-  border-radius: 999px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  background: linear-gradient(to right,
-      #a5d6a7 50%,
-      #4caf50 50%);
-  background-size: 200% 100%;
-  background-position: 100% 0%;
-  transition: background-position 0.8s ease-in-out, color 0.3s ease;
+  .animated-btn {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(to right,
+        #a5d6a7 50%,
+        #4caf50 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0%;
+    transition: background-position 0.8s ease-in-out, color 0.3s ease;
+  }
+    .appointment-wrapper p {
+    font-size: 0.95rem;
+    text-align: justify;
+  }
+
+  .main-heading {
+    /* font-size: 1.3rem; */
+    text-align: center;
+  }
+  .custom-paragraph {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  max-width: 550px;
+  margin-bottom: 1.2rem;
+}
+
+@media (min-width: 992px) {
+  .custom-paragraph {
+    max-width: 100%;
+    width: 550px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-paragraph {
+    font-size: 0.95rem;
+    width: 100%;
+    max-width: 100%;
+    text-align: justify;
+  }
 }

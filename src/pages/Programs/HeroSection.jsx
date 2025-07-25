@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { useTheme } from "../../Context/ThemeContext";
 
@@ -8,7 +7,7 @@ const HeroSection = () => {
   return (
     <section className="program-hero-section d-flex flex-column flex-md-row align-items-center justify-content-center custom-gap">
       <div className="circle-col position-relative">
-        <div className="circle-bg" />
+        <div className="circle-bg bubbles-wrapper" />
 
         <motion.div className="floating-card top-left" whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 50 }} transition={{ delay: 0.2 }}>
           Science - based solution for infertility concerns.
@@ -26,7 +25,6 @@ const HeroSection = () => {
           Science - based solution for infertility concerns.
         </motion.div>
       </div>
-
 
       <div className="title text-col text-center text-md-start mt-4 mt-md-0">
         <h1 className="hero-title">Natural Pregnancy</h1>
