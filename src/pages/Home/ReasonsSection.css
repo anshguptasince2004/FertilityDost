@@ -56,3 +56,16 @@
 .struggle-text {
   background-color: #ffffff;
 }
+@media (max-width: 768px) {
+  .reason-badge,
+  .reason-badge1 {
+    top: -20px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+  }
+
+  .reason-image {
+    margin-top: 30px; /* Add space for badge so it doesn't overlap image content */
+  }
+}
