@@ -5,6 +5,14 @@
   overflow: hidden;
   gap: 8rem;
 }
+.know-more {
+  background-color: rgba(25, 116, 37, 1);
+  color:white;
+}
+.know-more:hover {
+  background-color: rgb(34, 145, 49);
+  color: black;
+}
 
 .circle-col {
   position: relative;

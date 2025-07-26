@@ -39,12 +39,16 @@ const members = [
 const CoreMembers = () => {
   const containerRef = useRef(null);
   const [visibleIndex, setVisibleIndex] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    const container = containerRef.current;
+
     const handleScroll = () => {
-      const cards = containerRef.current.querySelectorAll(".core-card");
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const containerCenterX = containerRect.left + containerRect.width/2;
+      const cards = container.querySelectorAll(".core-card");
+      const containerRect = container.getBoundingClientRect();
+      const containerCenterX = containerRect.left + containerRect.width / 2;
 
       let closestIndex = 0;
       let minDistance = Infinity;
@@ -63,15 +67,60 @@ const CoreMembers = () => {
       setVisibleIndex(closestIndex);
     };
 
-    const container = containerRef.current;
     container.addEventListener("scroll", handleScroll);
-    
     handleScroll();
 
     return () => {
       container.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.5 }
+    );
+
+    const section = containerRef.current;
+    if (section) observer.observe(section);
+
+    return () => {
+      if (section) observer.unobserve(section);
+    };
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const scrollToCard = (index) => {
+      const cards = container.querySelectorAll(".core-card");
+      if (!cards[index]) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const containerCenterX = containerRect.left + containerRect.width / 2;
+
+      const cardRect = cards[index].getBoundingClientRect();
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+
+      const scrollOffset = cardCenterX - containerCenterX;
+      container.scrollBy({ left: scrollOffset, behavior: "smooth" });
+    };
+
+    let intervalId;
+
+    if (isInView && !isPaused) {
+      intervalId = setInterval(() => {
+        const nextIndex = (visibleIndex + 1) % members.length;
+        scrollToCard(nextIndex);
+      }, 2000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [visibleIndex, isInView, isPaused]);
 
   return (
     <div className="core-members-section">
@@ -84,7 +133,12 @@ const CoreMembers = () => {
         <div className="fade-left" />
         <div className="fade-right" />
 
-        <div className="scroll-container" ref={containerRef}>
+        <div
+          className="scroll-container"
+          ref={containerRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {members.map((member, index) => (
             <motion.div
               key={index}
@@ -102,7 +156,8 @@ const CoreMembers = () => {
           ))}
         </div>
       </div>
-      <CoreMember1/>
+
+      <CoreMember1 />
       <br />
       <div className="text-center">
         <ButtonWithHover />

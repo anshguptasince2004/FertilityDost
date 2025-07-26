@@ -32,7 +32,7 @@ const HeroSection = () => {
         <p className="hero-subtext">
           Program that increases your<br />chance of pregnancy.
         </p>
-        <button className="btn btn-success rounded-pill px-4 py-2 fw-bold">
+        <button className="know-more btn rounded-pill px-4 py-2 fw-bold">
           Know More
         </button>
       </div>
