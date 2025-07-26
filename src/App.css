@@ -4,9 +4,9 @@
   box-sizing: border-box;
   background-color: rgb(204, 241, 255);
 }
-
 body {
   background-color: #eaf6ff;
+  overflow-x: hidden;
 }
 html, body, #root {
   height: 100%;

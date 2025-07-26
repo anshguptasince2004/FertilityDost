@@ -10,7 +10,7 @@
 .award-card {
   width: 100%;
   max-width: 200px;
-  transition: box-shadow 0.2s ease, transform 0.3s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
   border-radius: 12px;
   border: none;
 }
@@ -22,12 +22,12 @@
 .award-img {
   max-height: 110px;
   object-fit: contain;
-  transition: filter 0.3s ease;
+  transition: filter 0.2s ease;
 }
 
 .grayscale-img {
   filter: grayscale(100%);
-  transition: filter 0.3s ease, opacity 0.3s ease;
+  transition: filter 0.2s ease, opacity 0.2s ease;
 }
 
 /* Press & Recognition Section */
@@ -38,6 +38,11 @@
   max-width: 95%;
   margin: 0 auto;
 }
+.press-scroll-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+}
+
 
 .press-card:hover {
   background-color: #fff;
