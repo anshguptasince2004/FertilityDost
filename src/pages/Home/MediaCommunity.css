@@ -4,6 +4,11 @@
 
 .grayscale-img {
     filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.grayscale-img:hover {
+  filter: grayscale(0%);
 }
 
 .carousel-card {
@@ -17,6 +22,21 @@
 .body5-section {
     background-color: white;
 }
+.media-logo {
+  width: 140px;
+  height: 100px;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .media-logo {
+    width: 80px;
+    height: 50px;
+  }
+}
+
 
 /* Circular Indicators
 .custom-carousel-indicators {

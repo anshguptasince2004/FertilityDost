@@ -1,7 +1,14 @@
+import { motion } from 'framer-motion';
 import './MediaCommunity.css';
 import img from '../../assets/SocialMedia.png';
+import logo1 from '../../assets/MediaLogo1.png';
+import logo2 from '../../assets/MediaLogo2.png';
+import logo3 from '../../assets/MediaLogo3.png';
+import logo4 from '../../assets/MediaLogo4.png';
 
 function MediaCommunity() {
+    const mediaLogos = [logo1, logo2, logo3, logo4];
+
     return (
         <div className="body5-section">
 
@@ -9,9 +16,16 @@ function MediaCommunity() {
                 <h4 className="fw-semibold">Your Dost <span className="text-primary">In Media</span></h4>
                 <div className="container mt-4">
                     <div className="row justify-content-center align-items-center g-4">
-                        {[1, 2, 3, 4].map((_, i) => (
+                        {mediaLogos.map((logo, i) => (
                             <div className="col-6 col-md-3" key={i}>
-                                <img src="" alt="Media Logo" className="img-fluid grayscale-img" />
+                                <motion.img
+                                    src={logo}
+                                    alt={`Media Logo ${i + 1}`}
+                                    className="media-logo grayscale-img"
+                                    initial={{ opacity: 0.9 }}
+                                    whileHover={{ opacity: 1, scale: 1.05 }}
+                                    transition={{ duration: 0.3 }}
+                                />
                             </div>
                         ))}
                     </div>
