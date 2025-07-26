@@ -5,7 +5,7 @@ function Header() {
   const { theme } = useTheme();
 
   return (
-    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: theme.color }}>
+    <nav className="navbar navbar-expand-lg sticky-top" style={{ backgroundColor: theme.color }}>
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <img

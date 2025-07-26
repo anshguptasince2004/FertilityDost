@@ -1,11 +1,8 @@
 import './HeroSection.css';
 
-function HeroSection({ data, language }) {
+function HeroSection({ data}) {
   return (
     <section className="hero-section d-flex align-items-center position-relative text-dark">
-      <div className="language-badge position-absolute top-0 end-0 bg-warning-subtle p-2 rounded">
-        <span>Lang: {language}</span>
-      </div>
 
       <div className="container py-5">
         <div className="row text-center text-md-start">
