@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import coupleImg from "../../assets/Programs/couple.png";
 import mobileImg from "../../assets/Programs/Mobile.png";
 import mainDoctor from "../../assets/Programs/docterMain.png";
@@ -58,6 +58,8 @@ const HowItWorks = () => {
 
 export const TeamOfExperts = () => {
   const [hovered, setHovered] = useState("main");
+  const [autoDoctor, setAutoDoctor] = useState("doc1");
+  const intervalRef = useRef(null);
 
   const doctorData = {
     main: {
@@ -94,7 +96,43 @@ export const TeamOfExperts = () => {
     },
   };
 
-  const current = doctorData[hovered];
+  const doctorCycle = ["doc1", "doc2", "doc3"];
+
+  useEffect(() => {
+    const startInterval = () => {
+      intervalRef.current = setInterval(() => {
+        setAutoDoctor((prev) => {
+          const currentIndex = doctorCycle.indexOf(prev);
+          const nextIndex = (currentIndex + 1) % doctorCycle.length;
+          return doctorCycle[nextIndex];
+        });
+      }, 3000);
+    };
+
+    startInterval();
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  const handleMouseEnter = (id) => {
+    setHovered(id);
+    clearInterval(intervalRef.current);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered("main");
+    intervalRef.current = setInterval(() => {
+      setAutoDoctor((prev) => {
+        const currentIndex = doctorCycle.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % doctorCycle.length;
+        return doctorCycle[nextIndex];
+      });
+    }, 3000);
+  };
+
+  const current = hovered === "main" ? doctorData[autoDoctor] : doctorData[hovered];
 
   return (
     <section className="experts-section">
@@ -104,7 +142,7 @@ export const TeamOfExperts = () => {
 
       <div className="experts-container container">
         <div className="expert-left-text">
-          <div key={hovered} className="fade-text fade-in">
+          <div key={hovered === "main" ? autoDoctor : hovered} className="fade-text fade-in">
             <h4>{current.name}</h4>
             <p className="specialty">{current.specialty}</p>
             <p className="location">
@@ -115,7 +153,7 @@ export const TeamOfExperts = () => {
         </div>
 
         <div className="expert-right">
-          <div key={hovered} className="main-doctor-image fade-in">
+          <div key={hovered === "main" ? autoDoctor : hovered} className="main-doctor-image fade-in">
             <img src={current.image} alt={current.name} />
             <div className="badges">
               <FaCheckCircle className="badge-icon check" />
@@ -127,17 +165,20 @@ export const TeamOfExperts = () => {
             <img
               src={doc1}
               alt="Doctor 1"
-              onMouseEnter={() => setHovered("doc1")}
+              onMouseEnter={() => handleMouseEnter("doc1")}
+              onMouseLeave={handleMouseLeave}
             />
             <img
               src={doc2}
               alt="Doctor 2"
-              onMouseEnter={() => setHovered("doc2")}
+              onMouseEnter={() => handleMouseEnter("doc2")}
+              onMouseLeave={handleMouseLeave}
             />
             <img
               src={doc3}
               alt="Doctor 3"
-              onMouseEnter={() => setHovered("doc3")}
+              onMouseEnter={() => handleMouseEnter("doc3")}
+              onMouseLeave={handleMouseLeave}
             />
           </div>
         </div>
