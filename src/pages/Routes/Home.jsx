@@ -19,7 +19,9 @@ function Home({ language }) {
       color: '#e9f5ffff',
       logo: homeLogo,
       logo1: homoLogo1,
-      footerColor: "#152346"
+      footerColor: "#152346",
+      logosize: "45px",
+      marginLeft: '0%',
     });
   }, [setTheme]);
 

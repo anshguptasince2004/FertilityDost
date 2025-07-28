@@ -9,6 +9,7 @@ import m1 from "../assets/Experts/GoogleBadge.png";
 import m2 from "../assets/Experts/AppStore.png";
 
 import "./layout.css";
+import { left } from "@popperjs/core";
 
 function Footer() {
   const { theme } = useTheme();
@@ -19,7 +20,7 @@ function Footer() {
         <div className="row mb-4">
 
           <div className="col-md-3 mb-4">
-            <img src={theme.logo1} alt="Fertility Dost" className="logo mb-3" />
+            <img src={theme.logo1} alt="Fertility Dost" className="logo mb-3" style={{height: theme.logosize, marginLeft: theme.marginLeft}}/>
             <div className="d-flex gap-3 mt-2 mx-3">
               <a href="#"><FaFacebookF className="footer-icon" /></a>
               <a href="#"><FaInstagram className="footer-icon" /></a>
