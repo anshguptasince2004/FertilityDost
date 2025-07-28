@@ -29,7 +29,7 @@ function AnimatedReason({ imgSrc, badgeClass, badgeText, title, desc, reverse })
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
       >
-        <img src={imgSrc} alt={title} className="img-fluid rounded reason-image" />
+        <img src={imgSrc} alt="reason" className="img-fluid rounded reason-image" />
         <div className={badgeClass}>{badgeText}</div>
       </motion.div>
 
@@ -39,8 +39,11 @@ function AnimatedReason({ imgSrc, badgeClass, badgeText, title, desc, reverse })
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
       >
-        <h5 className="fw-bold reason-title">{title}</h5>
-        <p dangerouslySetInnerHTML={{ __html: desc }}></p>
+        <h5
+          className="fw-bold reason-title"
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
+        <p dangerouslySetInnerHTML={{ __html: desc }} />
       </motion.div>
     </div>
   );
