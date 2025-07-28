@@ -3,11 +3,33 @@
 }
 
 .body4-section {
-    background-color:rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
 }
+
 .bg-dark-blue {
   background-color: rgb(26, 30, 57);
 }
+
 .content {
   margin-left: 5%;
+}
+
+.expert-card,
+.blog-card {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+}
+
+.expert-card:hover,
+.blog-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.expert-title {
+  font-size: large !important;
+}
+
+.expert-card:hover .expert-title,
+.blog-card:hover .blog-title {
+  color: #212529 !important;
 }
