@@ -1,6 +1,14 @@
+.body3-section {
+  background-color: white;
+}
 .body3-section .card {
   border-radius: 12px;
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.body3-section .card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .body3-section img {
@@ -16,14 +24,19 @@
   color: rgb(34, 53, 148);
   background-color: rgb(238, 247, 255);
 }
+
 .card-body ul li {
   margin-bottom: 0.5rem;
 }
 
-.body3-section {
-  background-color: white;
+.card-title-hover {
+  color: #6c757d;
+  transition: color 0.3s ease;
 }
+.hover-card:hover .card-title-hover {
+  color: #212529;
+}
+
 .Events-section {
   margin-top: 50px;
-
 }

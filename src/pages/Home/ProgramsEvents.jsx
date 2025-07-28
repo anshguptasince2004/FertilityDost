@@ -40,9 +40,9 @@ function ProgramsEvents() {
         <div className="row g-4 justify-content-center">
           {[1, 2, 3].map((_, i) => (
             <div className="col-md-4" key={i}>
-              <div className="card h-100 shadow-sm">
+              <div className="card h-100 shadow-sm hover-card">
                 <div className="card-body">
-                  <h5 className="fw-semibold">Natural Pregnancy Program</h5>
+                  <h5 className="fw-semibold card-title-hover">Natural Pregnancy Program</h5>
                   <p className="text-primary fw-semibold">6999/- (Per Month)</p>
                   <p className="small text-muted">
                     Avoid early miscarriages, delays and confusions by enrolling in pre-conception program.
@@ -63,8 +63,7 @@ function ProgramsEvents() {
         </div>
 
         {/* Events Section */}
-        <div className="Events-section">
-          <div className="angled-top my-5"></div>
+        <div className="Events-section mt-5">
           <div className="text-center">
             <p className="text-primary mb-1 fw-semibold">FERTILITY EVENTS</p>
             <h5 className="fw-semibold mb-4">
@@ -75,10 +74,10 @@ function ProgramsEvents() {
           <div className="row g-4 justify-content-center">
             {events.map((event, i) => (
               <div className="col-md-4" key={i}>
-                <div className="card h-100 shadow-sm">
+                <div className="card h-100 shadow-sm hover-card">
                   <img src={event.img} alt="Event" className="card-img-top" />
                   <div className="card-body">
-                    <h6 className="fw-semibold">{event.title}</h6>
+                    <h6 className="fw-semibold card-title-hover">{event.title}</h6>
                     <div className="d-flex align-items-center small text-muted mb-1">
                       <FaCalendarAlt className="me-2" />
                       {event.date}
@@ -105,4 +104,5 @@ function ProgramsEvents() {
     </div>
   );
 }
+
 export default ProgramsEvents;
