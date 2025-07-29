@@ -1,4 +1,4 @@
-import logo from '../../assets/FertilityDostLogo1.png';
+import logo from '../../assets/RedLogo.png';
 import './WhyChooseUs.css';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -14,11 +14,11 @@ function WhyChooseUs() {
   ];
 
   return (
-    <div className="why-choose-us-section py-5 position-relative bg-light-blue">
+    <div className="why-choose-us-section py-5 position-relative bg">
       <div className="angled-top"></div>
 
       <div className="container text-center">
-        <h6 className="text-info fw-semibold">WHY CHOOSE US</h6>
+        <h6 className="text-danger fw-semibold">WHY CHOOSE US</h6>
         <br />
         <h3 className="fw-semibold mt-2">
           Did You Know? <span className="text">33 Million People</span> Suffer From Infertility

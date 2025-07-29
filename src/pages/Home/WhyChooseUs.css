@@ -1,5 +1,5 @@
-.bg-light-blue {
-  background-color: #f1faff;
+.bg {
+  background-color: rgb(253, 235, 237);
   position: relative;
   overflow: hidden;
 }
@@ -9,7 +9,7 @@
 }
 
 .text {
-  color: #0c3a84;
+  color: #aa0808;
 }
 .text-muted {
   color: #92989e !important;
