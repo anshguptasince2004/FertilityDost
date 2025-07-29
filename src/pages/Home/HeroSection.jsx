@@ -5,16 +5,16 @@ function HeroSection({ data}) {
     <section className="hero-section d-flex align-items-center position-relative text-dark">
 
       <div className="container py-5">
-        <div className="row text-center text-md-start">
+        <div className="row text-center text-md-start text-light">
           <div className="col-md-2 col-lg-7">
             <h2 className="mb-2">{data.title}</h2>
             <i className="mb-4 d-block">{data.subtitle}</i>
 
-            <h1 className="hero-title mb-3">
-              “Your <span><div className="highlight">Personalised</div> Fertility Coach”</span>
+            <h1 className="hero-title text-light mb-3">
+              “Your <span><div className="highlight text-light">Personalised</div> Fertility Coach”</span>
             </h1>
 
-            <button className="btn btn-light px-4 py-2 fw-semibold shadow-sm mt-2">
+            <button className="appointment-btn btn btn-light px-4 py-2 fw-semibold shadow-sm mt-2">
               Book Your Appointment
             </button>
           </div>

@@ -4,7 +4,6 @@
 }
 
 .highlight {
-  color: rgb(46, 46, 108);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -13,6 +12,10 @@
   .hero-title {
     font-size: 3rem;
   }
+}
+
+.appointment-btn:hover {
+  background-color: rgb(255, 214, 214);
 }
 
 .hero-section {

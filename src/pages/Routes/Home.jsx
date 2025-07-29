@@ -16,7 +16,7 @@ function Home({ language }) {
 
   useEffect(() => {
     setTheme({
-      color: '#e9f5ffff',
+      color: '#ffececff',
       logo: homeLogo,
       logo1: homoLogo1,
       footerColor: "#4B0000",
