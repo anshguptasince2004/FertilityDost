@@ -14,11 +14,11 @@ function WhyChooseUs() {
   ];
 
   return (
-    <div className="why-choose-us-section py-5 position-relative bg">
+    <div className="why-choose-us-section py-4 position-relative bg">
       <div className="angled-top"></div>
 
       <div className="container text-center">
-        <h6 className="text-danger fw-semibold">WHY CHOOSE US</h6>
+        <h6 className="text-danger fw-bold">WHY CHOOSE US?</h6>
         <br />
         <h3 className="fw-semibold mt-2">
           Did You Know? <span className="text">33 Million People</span> Suffer From Infertility

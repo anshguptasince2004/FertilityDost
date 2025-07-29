@@ -48,7 +48,7 @@ function ExpertsBlogs() {
     <div className="body4-section py-5">
       <div className="container">
         <h3 className="text-center mb-5 fw-semibold">
-          A Team Of <span className="text-primary">Experts Dost</span>
+          A Team Of <span className="text-danger">Experts Dost</span>
         </h3>
 
         <div className="row text-center mb-3 gap-0">
@@ -76,14 +76,14 @@ function ExpertsBlogs() {
         </div>
 
         {/* Mobile App Section */}
-        <div className="row align-items-center mb-5 pt-0 rounded bg-light-blue">
-          <div className="col-md-5 text-center bg-dark-blue min-vh-25">
+        <div className="row align-items-center mb-5 rounded bg-light-red">
+          <div className="col-md-5 mobile-text-center bg-dark-blue min-vh-25">
             <img src={mobile} alt="Mobile App Mockup" className="img-fluid pt-5" />
           </div>
           <div className="content col-md-6 text-center">
             <h4 className="fw-semibold mb-4">
               Why You Should <br />
-              <span className="text-primary">Download Our Mobile App</span>
+              <span className="text-danger">Download Our Mobile App</span>
             </h4>
             <div className="d-flex flex-wrap gap-2 mb-3">
               <span className="bg-white text-dark p-2">Progress Tracking</span>
@@ -102,7 +102,7 @@ function ExpertsBlogs() {
 
         {/* Blogs Section */}
         <h4 className="text-center fw-semibold mb-4">
-          Stay Updated with <span className="text-primary">Our Blogs</span>
+          Stay Updated with <span className="text-danger">Our Blogs</span>
         </h4>
         <div className="row text-center mb-4">
           {blogData.map((blog, i) => (
@@ -117,7 +117,7 @@ function ExpertsBlogs() {
                 <div className="card-body">
                   <h6 className="fw-semibold blog-title text-muted">{blog.title}</h6>
                   <p className="text-muted small mb-0">
-                    I work in corporate sector & undergo huge stress plus... <span className="text-primary">Read More</span>
+                    I work in corporate sector & undergo huge stress plus... <span className="text-danger">Read More</span>
                   </p>
                 </div>
               </div>
@@ -126,7 +126,7 @@ function ExpertsBlogs() {
         </div>
 
         <div className="text-center">
-          <button className="btn btn-outline-primary">View All Blogs</button>
+          <button className="btn btn-outline-danger">View All Blogs</button>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
-.bg-light-blue {
-  background-color: #f1faff;
+.bg-light-red {
+  background-color: #faeeee;
 }
 
 .body4-section {
@@ -7,7 +7,7 @@
 }
 
 .bg-dark-blue {
-  background-color: rgb(26, 30, 57);
+  background-color: rgb(57, 26, 26);
 }
 
 .content {
@@ -32,4 +32,10 @@
 .expert-card:hover .expert-title,
 .blog-card:hover .blog-title {
   color: #212529 !important;
+}
+
+.mobile-text-center {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
 }
