@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
     color: "#e9f5ff",    
     logo: "/src/assets/FertilityDostLogo1.png",
     logo1: "/src/assets/FertilityDostLogo.png",
-    footerColor: "#152346",
+    footerColor: "#4B0000",
     logosize: "50px",
     marginLeft: "10%",
   });

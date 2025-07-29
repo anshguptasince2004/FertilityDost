@@ -13,6 +13,7 @@ import FertilityScreening from './pages/Routes/FertilityScreening';
 import Experts from './pages/Routes/Experts';
 import Test from './pages/Routes/Test';
 import { ThemeProvider } from './Context/ThemeContext';
+import { h1 } from 'framer-motion/client';
 
 function App() {
   const language = "English";
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/fertility-screening" element={<FertilityScreening />} />
                 <Route path="/experts" element={<Experts />} />
                 <Route path='/test' element={<Test />} />
+                <Route path="/*" element={<h1>Page Not Found!</h1>} />
               </Routes>
             </main>
             <Footer />

@@ -21,7 +21,7 @@ function Header() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto fw-semibold gap-3">
             <li className="nav-item">
-              <NavLink to="/" className={({ isActive }) => isActive ? "nav-link text-primary" : "nav-link text-dark"}>Home</NavLink>
+              <NavLink to="/" className={({ isActive }) => isActive ? "nav-link text-danger" : "nav-link text-dark"}>Home</NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link text-danger" : "nav-link text-dark"}>About Us</NavLink>

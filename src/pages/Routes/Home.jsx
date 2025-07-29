@@ -7,8 +7,8 @@ import ExpertsBlogs from '../Home/ExpertsBlogs';
 import MediaCommunity from '../Home/MediaCommunity';
 import { heroSectionData } from '../../layout/HomeData';
 import { useTheme } from "../../Context/ThemeContext";
-import homeLogo from '../../assets/FertilityDostLogo1.png';
-import homoLogo1 from '../../assets/FertilityDostLogo.png';
+import homeLogo from '../../assets/RedLogo.png';
+import homoLogo1 from '../../assets/RedLogo1.png';
 import { footer } from "framer-motion/client";
 
 function Home({ language }) {
@@ -19,9 +19,7 @@ function Home({ language }) {
       color: '#e9f5ffff',
       logo: homeLogo,
       logo1: homoLogo1,
-      footerColor: "#152346",
-      logosize: "45px",
-      marginLeft: '0%',
+      footerColor: "#4B0000",
     });
   }, [setTheme]);
 
