@@ -16,13 +16,10 @@
   height: 200px;
 }
 
-.btn-primary {
-  background-color: rgb(34, 53, 148);
-}
-.btn-outline-primary {
+.btn-outline-danger {
   border: none;
-  color: rgb(34, 53, 148);
-  background-color: rgb(238, 247, 255);
+  color: rgb(148, 34, 34);
+  background-color: rgb(255, 238, 238);
 }
 
 .card-body ul li {
@@ -34,7 +31,7 @@
   transition: color 0.3s ease;
 }
 .hover-card:hover .card-title-hover {
-  color: #212529;
+  color: #4f1b1b;
 }
 
 .Events-section {

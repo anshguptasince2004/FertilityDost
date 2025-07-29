@@ -35,7 +35,7 @@ function ProgramsEvents() {
 
         {/* Recommended Programs Section */}
         <h4 className="text-center fw-semibold mb-4">
-          Our Recommended <span className="text-primary">Programs</span> For You
+          Our Recommended <span className="text-danger">Programs</span> For You
         </h4>
         <div className="row g-4 justify-content-center">
           {[1, 2, 3].map((_, i) => (
@@ -43,7 +43,7 @@ function ProgramsEvents() {
               <div className="card h-100 shadow-sm hover-card">
                 <div className="card-body">
                   <h5 className="fw-semibold card-title-hover">Natural Pregnancy Program</h5>
-                  <p className="text-primary fw-semibold">6999/- (Per Month)</p>
+                  <p className="text-danger fw-semibold">6999/- (Per Month)</p>
                   <p className="small text-muted">
                     Avoid early miscarriages, delays and confusions by enrolling in pre-conception program.
                   </p>
@@ -54,7 +54,7 @@ function ProgramsEvents() {
                     <li className="mb-2">🔹 Weekly Review Call with Fertility Coach</li>
                   </ul>
                 </div>
-                <button className={`btn ${i === 1 ? 'btn-primary' : 'btn-outline-primary'} w-100 mt-3`}>
+                <button className={`btn ${i === 1 ? 'btn-outline-danger' : 'btn-outline-danger'} w-100 mt-3`}>
                   Explore More
                 </button>
               </div>
@@ -65,9 +65,9 @@ function ProgramsEvents() {
         {/* Events Section */}
         <div className="Events-section mt-5">
           <div className="text-center">
-            <p className="text-primary mb-1 fw-semibold">FERTILITY EVENTS</p>
+            <p className="text-danger mb-1 fw-semibold">FERTILITY EVENTS</p>
             <h5 className="fw-semibold mb-4">
-              Join Our Free <span className="text-primary">Events / Session</span>
+              Join Our Free <span className="text-danger">Events / Session</span>
             </h5>
           </div>
 
@@ -87,7 +87,7 @@ function ProgramsEvents() {
                     </div>
                   </div>
                   <div className="card-footer bg-transparent border-0 p-0">
-                    <button className={`btn ${event.isLive ? 'btn-primary' : 'btn-outline-primary'} w-100`}>
+                    <button className={`btn ${event.isLive ? 'btn-outline-danger' : 'btn-outline-danger'} w-100`}>
                       {event.isLive ? 'Join Now' : 'Register Now'}
                     </button>
                   </div>
@@ -98,7 +98,7 @@ function ProgramsEvents() {
         </div>
 
         <div className="text-center mt-4">
-          <button className="btn btn-outline-dark px-4">View All Fertility Events</button>
+          <button className="btn btn-outline-danger px-4">View All Fertility Events</button>
         </div>
       </div>
     </div>
