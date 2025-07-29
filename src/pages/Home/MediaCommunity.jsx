@@ -12,8 +12,8 @@ function MediaCommunity() {
     return (
         <div className="body5-section">
 
-            <div className="bg-light-blue py-5 text-center">
-                <h4 className="fw-semibold">Your Dost <span className="text-primary">In Media</span></h4>
+            <div className="bg-light-red py-5 text-center">
+                <h4 className="fw-semibold">Your Dost <span className="text-danger">In Media</span></h4>
                 <div className="container mt-4">
                     <div className="row justify-content-center align-items-center g-4">
                         {mediaLogos.map((logo, i) => (
@@ -33,7 +33,7 @@ function MediaCommunity() {
             </div>
 
             <div className="container my-5 text-center" id='Carousal'>
-                <h4 className="fw-semibold">Join Our <span className="text-primary">Community</span></h4>
+                <h4 className="fw-semibold">Join Our <span className="text-danger">Community</span></h4>
 
                 <div id="communityCarousel" className="carousel slide mt-4" data-bs-ride="carousel" data-bs-interval="3000">
 
@@ -56,7 +56,7 @@ function MediaCommunity() {
                                             </div>
                                             <p className="text-muted small mb-0">
                                                 I work in corporate sector & undergo huge stress plus hormonal issues...
-                                                <span className="text-primary"> Read More</span>
+                                                <span className="text-danger"> Read More</span>
                                             </p>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@ function MediaCommunity() {
           
                 <div className="d-flex justify-content-center gap-3 mt-4">
                     <button className="btn btn-outline-dark">View All Reviews</button>
-                    <button className="btn btn-outline-primary">View All Youtube Videos</button>
+                    <button className="btn btn-outline-danger">View All Youtube Videos</button>
                 </div>
             </div>
         </div>
