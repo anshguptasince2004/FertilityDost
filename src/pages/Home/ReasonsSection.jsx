@@ -52,7 +52,7 @@ function AnimatedReason({ imgSrc, badgeClass, badgeText, title, desc, reverse })
 function ReasonsSection() {
   return (
     <>
-      <div className="struggle-text text-center py-5">
+      <div className="struggle-text text-center pt-5">
         <h4 className="fw-semibold text-dark">
           Are You Struggling With<span className="highlight">Infertility?</span>
         </h4>
