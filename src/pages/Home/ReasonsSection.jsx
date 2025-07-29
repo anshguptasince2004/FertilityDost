@@ -54,7 +54,7 @@ function ReasonsSection() {
     <>
       <div className="struggle-text text-center py-5">
         <h4 className="fw-semibold text-dark">
-          Are You Struggling With <span className="highlight">Infertility?</span>
+          Are You Struggling With<span className="highlight">Infertility?</span>
         </h4>
       </div>
 
