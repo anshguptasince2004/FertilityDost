@@ -76,7 +76,7 @@ function ExpertsBlogs() {
         </div>
 
         {/* Mobile App Section */}
-        <div className="row align-items-center mb-5 rounded bg-light-green">
+        <div className="mobile row align-items-center mb-5 rounded bg-light-green">
           <div className="col-md-5 mobile-text-center bg-dark-blue min-vh-25">
             <img src={mobile} alt="Mobile App Mockup" className="img-fluid pt-5" />
           </div>
