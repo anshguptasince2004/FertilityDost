@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useAuth } from "./../Context/AuthContext";
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+const { login } = useAuth();
+
+login(token);
 
   const [message, setMessage] = useState("");
 

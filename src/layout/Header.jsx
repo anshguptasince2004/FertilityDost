@@ -1,7 +1,21 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useTheme } from '../Context/ThemeContext';
+import { useAuth } from "../Context/AuthContext";
+
 
 function Header() {
+  const { user, logout } = useAuth();
+  {
+    user ? (
+      <>
+        <span>Welcome, {user.name}</span>
+        <button onClick={logout}>Logout</button>
+      </>
+    ) : (
+      <Link to="/login">Login</Link>
+    )
+  }
+
   const { theme } = useTheme();
 
   return (
