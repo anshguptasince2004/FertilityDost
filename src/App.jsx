@@ -13,32 +13,45 @@ import FertilityScreening from './pages/Routes/FertilityScreening';
 import Experts from './pages/Routes/Experts';
 import Test from './pages/Routes/Test';
 import { ThemeProvider } from './Context/ThemeContext';
-import { h1 } from 'framer-motion/client';
+import Login from "./pages/Login";
+import Signup from "./pages/SignUp";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const language = "English";
   return (
     <ThemeProvider>
-        <div className="app-wrapper">
-          <BrowserRouter>
-            <Header />
-            <main className='flex-grow-1'>
-              <Routes>
-                <Route path="/" element={<Home language={language} />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/programs" element={<Programs />} />
-                <Route path="/learn" element={<Learn />} />
-                <Route path="/get-the-app" element={<GetTheApp />} />
-                <Route path="/fertility-screening" element={<FertilityScreening />} />
-                <Route path="/experts" element={<Experts />} />
-                <Route path='/test' element={<Test />} />
-                <Route path="/*" element={<h1>Page Not Found!</h1>} />
-              </Routes>
-            </main>
-            <Footer />
-          </BrowserRouter>
-        </div>
-    </ThemeProvider>
+      <div className="app-wrapper">
+        <BrowserRouter>
+          <Header />
+          <main className='flex-grow-1'>
+            <Routes>
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/" element={<Home language={language} />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/programs" element={<Programs />} />
+              <Route path="/learn" element={<Learn />} />
+              <Route path="/get-the-app" element={<GetTheApp />} />
+              <Route path="/fertility-screening" element={<FertilityScreening />} />
+              <Route path="/experts" element={<Experts />} />
+              <Route path='/test' element={<Test />} />
+              <Route path="/*" element={<h1>Page Not Found!</h1>} />
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </ThemeProvider >
   );
 }
 
