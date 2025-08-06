@@ -1,22 +1,16 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTheme } from '../Context/ThemeContext';
 import { useAuth } from "../Context/AuthContext";
 
-
 function Header() {
-  const { user, logout } = useAuth();
-  {
-    user ? (
-      <>
-        <span>Welcome, {user.name}</span>
-        <button onClick={logout}>Logout</button>
-      </>
-    ) : (
-      <Link to="/login">Login</Link>
-    )
-  }
-
   const { theme } = useTheme();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top" style={{ backgroundColor: theme.color }}>
@@ -28,6 +22,7 @@ function Header() {
             style={{ height: '35px' }}
           />
         </Link>
+
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -58,6 +53,30 @@ function Header() {
             <li className="nav-item">
               <NavLink to="/test" className={({ isActive }) => isActive ? "nav-link text-danger" : "nav-link text-dark"}>Tests</NavLink>
             </li>
+
+            {/* 👇 Conditional Auth Buttons */}
+            {user ? (
+              <>
+                <li className="nav-item d-flex align-items-center">
+                  <span className="nav-link text-dark">Welcome, {user.name}</span>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/dashboard" className="nav-link text-dark">Dashboard</NavLink>
+                </li>
+                <li className="nav-item">
+                  <button onClick={handleLogout} className="btn btn-sm btn-outline-danger">Logout</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <NavLink to="/login" className="btn btn-sm btn-outline-primary">Login</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/signup" className="btn btn-sm btn-primary ms-2">Sign Up</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

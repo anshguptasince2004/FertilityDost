@@ -14,11 +14,19 @@ router.post("/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({ error: "Invalid credentials" });
 
-    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, role: user.role, name: user.name, email: user.email }, process.env.JWT_SECRET, {
       expiresIn: "1h"
     });
 
-    res.status(200).json({ token, message: "Login successful" });
+    res.status(200).json({
+      token,
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role
+      },
+      message: "Login successful"
+    });
   } catch (err) {
     res.status(500).json({ error: "Server error" });
   }
@@ -45,11 +53,20 @@ router.post("/signup", async (req, res) => {
 
     await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign(
+      {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role || "user",
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+    res.status(201).json({ token, message: "Signup successful" });
 
-    res.status(201).json({ token, user: { id: newUser._id, name, email } });
   } catch (err) {
     console.error("Signup error:", err.message);
     res.status(500).json({ error: "Something went wrong" });
