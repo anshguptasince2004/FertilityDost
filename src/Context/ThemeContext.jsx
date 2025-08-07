@@ -5,9 +5,9 @@ export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState({
-    color: "#e9f5ff",    
-    logo: "/src/assets/FertilityDostLogo1.png",
-    logo1: "/src/assets/FertilityDostLogo.png",
+    color: "#ffececff",
+    logo: "/src/assets/RedLogo.png",
+    logo1: "/src/assets/RedLogo1.png",
     footerColor: "#4B0000",
   });
 

@@ -1,6 +1,9 @@
 import './HeroSection.css';
+import { useState } from "react";
+import AppointmentModal from "../../components/AppointmentModel";
 
 function HeroSection({ data}) {
+  const [showModal, setShowModal] = useState(false);
   return (
     <section className="hero-section d-flex align-items-center position-relative text-dark">
 
@@ -14,9 +17,10 @@ function HeroSection({ data}) {
               “Your <span><div className="highlight text-light">Personalised</div> Fertility Coach”</span>
             </h1>
 
-            <button className="appointment-btn btn btn-light px-4 py-2 fw-semibold shadow-sm mt-2">
+            <button className="appointment-btn btn btn-light px-4 py-2 fw-semibold shadow-sm mt-2" onClick={() => setShowModal(true)}>
               Book Your Appointment
             </button>
+             <AppointmentModal show={showModal} handleClose={() => setShowModal(false)} />
           </div>
         </div>
       </div>
