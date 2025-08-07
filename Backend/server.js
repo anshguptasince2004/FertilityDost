@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const enrollRoutes = require("./routes/enrollRoutes");
 const authRoutes = require("./routes/authRoutes");
+const appointmentRoutes = require("./routes/appointment");
 
 const app = express();
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/api/enroll", enrollRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/appointments", appointmentRoutes);
 
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;

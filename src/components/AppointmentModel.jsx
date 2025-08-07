@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Modal, Button, Form, Row, Col, Alert } from "react-bootstrap";
+import bookingService from "../services/bookingService";
+import authService from "../services/authService";
 import { useAuth } from "../Context/AuthContext";
 import axios from "axios";
 import "./AppointmentModel.css";
@@ -19,6 +21,7 @@ const AppointmentModal = ({ show, handleClose }) => {
   });
 
   const [flashMessage, setFlashMessage] = useState("");
+  const [flashVariant, setFlashVariant] = useState("success");
   const [currentMonthOffset, setCurrentMonthOffset] = useState(0);
 
   const getDisplayedMonth = (offset) => {
@@ -52,26 +55,62 @@ const AppointmentModal = ({ show, handleClose }) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const response = await axios.post("http://localhost:5000/api/appointments/book", formData);
+  const requiredFields = ["firstName", "lastName", "mobile", "email", "gender", "callType", "slotDate", "slotTime"];
+  const emptyFields = requiredFields.filter((field) => !formData[field]);
 
-      if (!user) {
-        login(response.data.token);
-      }
+  if (emptyFields.length > 0) {
+    setFlashMessage("Please fill in all the fields.");
+    setFlashVariant("danger");
+    return;
+  }
 
-      setFlashMessage("Your appointment is booked!");
-      setTimeout(() => {
-        setFlashMessage("");
-        handleClose();
-      }, 2000);
-    } catch (err) {
-      console.error(err);
-      setFlashMessage("Something went wrong. Please try again.");
+  try {
+    let token = localStorage.getItem("token");
+
+    if (!user) {
+      const signupPayload = {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        mobile: formData.mobile,
+        password: "default123",
+      };
+
+      const signupRes = await axios.post("http://localhost:5000/api/auth/signup", signupPayload);
+      token = signupRes.data.token;
+
+      login(token);
     }
-  };
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await axios.post(
+      "http://localhost:5000/api/appointments/book",
+      formData,
+      config
+    );
+
+    setFlashMessage("Your appointment is booked!");
+    setFlashVariant("success");
+    setTimeout(() => {
+      setFlashMessage("");
+      handleClose();
+    }, 2000);
+
+  } catch (err) {
+    console.error(err);
+    setFlashMessage("Something went wrong. Please try again.");
+    setFlashVariant("danger");
+  }
+};
+
+
   const generateSlotDates = () => {
     const today = new Date();
     return Array.from({ length: 6 }, (_, i) => {
@@ -94,7 +133,7 @@ const AppointmentModal = ({ show, handleClose }) => {
       </Modal.Header>
 
       <Modal.Body>
-        {flashMessage && <Alert variant="success">{flashMessage}</Alert>}
+        {flashMessage && <Alert variant={flashVariant}>{flashMessage}</Alert>}
 
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
