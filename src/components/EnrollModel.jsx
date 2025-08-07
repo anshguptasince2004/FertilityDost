@@ -1,19 +1,35 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./EnrollModel.css";
 import FormCouple from "../assets/Programs/FormCouple.png";
-import axios from "axios";
+import enrollService from "../services/enrollService";
+import authService from "../services/authService";
+import { useAuth } from "../Context/AuthContext";
+
 
 const EnrollModal = ({ isOpen, onClose }) => {
-    if (!isOpen) return null;
+    const { user, login } = useAuth();
+    const [flash, setFlash] = useState({ message: "", type: "" });
 
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         mobile: "",
         email: "",
-        gender: ""
+        gender: "",
     });
+
+    useEffect(() => {
+        if (user) {
+            const [firstName, lastName = ""] = user.name.split(" ");
+            setFormData({
+                firstName,
+                lastName,
+                email: user.email,
+                mobile: user.mobile || "",
+                gender: "",
+            });
+        }
+    }, [user]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,15 +42,48 @@ const EnrollModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const fullName = `${formData.firstName} ${formData.lastName}`;
+        const signupData = {
+            name: fullName,
+            email: formData.email,
+            password: formData.mobile,
+        };
+
+        const enrollData = {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            mobile: formData.mobile,
+            gender: formData.gender,
+            program: "Natural Pregnancy Program",
+        };
+
         try {
-            const response = await axios.post("http://localhost:5000/api/enroll", formData);
-            alert(response.data.message || "Form submitted successfully!");
-            onClose();
+            let token = localStorage.getItem("token");
+
+
+            if (!token) {
+                const signupRes = await authService.signup(signupData);
+                token = signupRes.token;
+                localStorage.setItem("token", token);
+                login(token);
+            }
+
+
+            await enrollService.enroll(enrollData, token);
+            setFlash({ message: "Enrolled successfully!", type: "success" });
+            setTimeout(() => {
+                setFlash({ message: "", type: "" });
+                onClose();
+            }, 2000);
         } catch (err) {
-            alert("Submission failed. Please try again.");
+            const errorMsg = err.response?.data?.error || "Enrollment failed.";
+            setFlash({ message: errorMsg, type: "danger" });
             console.error(err);
         }
     };
+
+    if (!isOpen) return null;
 
     return (
         <div className="modal-overlay">
@@ -70,6 +119,12 @@ const EnrollModal = ({ isOpen, onClose }) => {
 
                             <button type="submit" className="submit-btn">Enroll Program Now</button>
                         </form>
+
+                        {flash.message && (
+                            <div className={`alert alert-${flash.type} mt-3`} role="alert">
+                                {flash.message}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

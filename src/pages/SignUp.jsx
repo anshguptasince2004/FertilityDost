@@ -22,7 +22,7 @@ const Signup = () => {
       const response = await authService.signup(formData);
       if (response.token) {
         localStorage.setItem("token", response.token);
-        navigate("/dashboard");
+        navigate("/");
       }
     } catch (err) {
       setError(err.response?.data?.error || "Signup failed.");
@@ -60,7 +60,7 @@ const Signup = () => {
           required
         />
         {error && <div className="text-danger mb-2">{error}</div>}
-        <button className="btn btn-primary w-100" type="submit">
+        <button className="btn btn-danger w-100 mb-5" type="submit">
           Sign Up
         </button>
       </form>

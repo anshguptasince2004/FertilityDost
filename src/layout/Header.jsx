@@ -54,12 +54,8 @@ function Header() {
               <NavLink to="/test" className={({ isActive }) => isActive ? "nav-link text-danger" : "nav-link text-dark"}>Tests</NavLink>
             </li>
 
-            {/* 👇 Conditional Auth Buttons */}
             {user ? (
               <>
-                <li className="nav-item d-flex align-items-center">
-                  <span className="nav-link text-dark">Welcome, {user.name}</span>
-                </li>
                 <li className="nav-item">
                   <NavLink to="/dashboard" className="nav-link text-dark">Dashboard</NavLink>
                 </li>
@@ -70,10 +66,10 @@ function Header() {
             ) : (
               <>
                 <li className="nav-item">
-                  <NavLink to="/login" className="btn btn-sm btn-outline-primary">Login</NavLink>
+                  <NavLink to="/login" className="btn btn-sm btn-outline-danger">Login</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/signup" className="btn btn-sm btn-primary ms-2">Sign Up</NavLink>
+                  <NavLink to="/signup" className="btn btn-sm btn-danger ms-2">Sign Up</NavLink>
                 </li>
               </>
             )}

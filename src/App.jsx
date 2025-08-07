@@ -15,8 +15,6 @@ import Test from './pages/Routes/Test';
 import { ThemeProvider } from './Context/ThemeContext';
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
-import Dashboard from "./pages/Dashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const language = "English";
@@ -29,14 +27,6 @@ function App() {
             <Routes>
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
               <Route path="/" element={<Home language={language} />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/programs" element={<Programs />} />

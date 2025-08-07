@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "./../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -17,20 +17,20 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await axios.post("http://localhost:5000/api/auth/login", formData);
-    localStorage.setItem("token", res.data.token);
-    login(res.data.token);
-    setMessage("Login successful!");
-    navigate("/dashboard");
-  } catch (err) {
-    const backendError = err.response?.data?.error || "Login failed";
-    setMessage(backendError);
-    console.error("Login error:", backendError);
-  }
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
+      localStorage.setItem("token", res.data.token);
+      login(res.data.token);
+      setMessage("Login successful!");
+      navigate("/");
+    } catch (err) {
+      const backendError = err.response?.data?.error || "Login failed";
+      setMessage(backendError);
+      console.error("Login error:", backendError);
+    }
+  };
 
 
   return (
@@ -55,7 +55,7 @@ const handleSubmit = async (e) => {
           required
           style={{ display: "block", width: "100%", marginBottom: "1rem" }}
         />
-        <button type="submit">Login</button>
+        <button type="submit" className="btn text-light btn-danger">Login</button>
       </form>
       <p>{message}</p>
     </div>
