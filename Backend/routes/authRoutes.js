@@ -43,13 +43,17 @@ router.get("/protected", authenticateToken, (req, res) => {
 
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-
+    const { name, email, password, role } = req.body; 
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ error: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ name, email, password: hashedPassword });
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+      role: role
+    });
 
     await newUser.save();
 
@@ -58,7 +62,7 @@ router.post("/signup", async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
-        role: newUser.role || "user",
+        role: newUser.role,
       },
       process.env.JWT_SECRET,
       {
@@ -72,5 +76,6 @@ router.post("/signup", async (req, res) => {
     res.status(500).json({ error: "Something went wrong" });
   }
 });
+
 
 module.exports = router;

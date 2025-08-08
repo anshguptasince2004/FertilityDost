@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import AdminLogin from './pages/Admin/adminLogin';
+import AdminDashboard from './pages/Admin/adminDashboard';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Home from './pages/Routes/Home';
@@ -15,9 +17,11 @@ import Test from './pages/Routes/Test';
 import { ThemeProvider } from './Context/ThemeContext';
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
+import PrivateAdminRoute from './PrivateAdminRoute';
 
 function App() {
   const language = "English";
+
   return (
     <ThemeProvider>
       <div className="app-wrapper">
@@ -25,8 +29,8 @@ function App() {
           <Header />
           <main className='flex-grow-1'>
             <Routes>
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} /> {/* user */}
+              <Route path="/login" element={<Login />} /> {/* user */}
               <Route path="/" element={<Home language={language} />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/programs" element={<Programs />} />
@@ -34,14 +38,25 @@ function App() {
               <Route path="/get-the-app" element={<GetTheApp />} />
               <Route path="/fertility-screening" element={<FertilityScreening />} />
               <Route path="/experts" element={<Experts />} />
-              <Route path='/test' element={<Test />} />
+              <Route path="/test" element={<Test />} />
+
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <PrivateAdminRoute>
+                    <AdminDashboard />
+                  </PrivateAdminRoute>
+                }
+              />
+
               <Route path="/*" element={<h1>Page Not Found!</h1>} />
             </Routes>
           </main>
           <Footer />
         </BrowserRouter>
       </div>
-    </ThemeProvider >
+    </ThemeProvider>
   );
 }
 
