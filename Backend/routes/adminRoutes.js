@@ -9,6 +9,7 @@ const User = require("../models/User");
 const adminAuth = require("../Middleware/admin");
 
 router.post("/login", async (req, res) => {
+  console.log("Admin login hit with:", req.body);
   const { email, password } = req.body;
 
   try {
@@ -28,6 +29,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
 
+    console.log("Admin login success");
     res.json({ token });
   } catch (err) {
     console.error("Admin login error:", err.message);

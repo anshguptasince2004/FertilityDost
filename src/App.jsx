@@ -44,12 +44,11 @@ function App() {
               <Route
                 path="/admin/dashboard"
                 element={
-                  <PrivateAdminRoute>
+                  // <PrivateAdminRoute>
                     <AdminDashboard />
-                  </PrivateAdminRoute>
+                  /* </PrivateAdminRoute> */
                 }
               />
-
               <Route path="/*" element={<h1>Page Not Found!</h1>} />
             </Routes>
           </main>
