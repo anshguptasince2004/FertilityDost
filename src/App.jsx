@@ -21,7 +21,6 @@ import PrivateAdminRoute from './PrivateAdminRoute';
 
 function App() {
   const language = "English";
-
   return (
     <ThemeProvider>
       <div className="app-wrapper">
