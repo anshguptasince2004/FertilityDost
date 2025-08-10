@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import AdminLogin from './pages/Admin/adminLogin';
-import AdminDashboard from './pages/Admin/adminDashboard';
+import AdminDashboard from './pages/Admin/adminDashboard'; 
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Home from './pages/Routes/Home';
@@ -17,43 +17,54 @@ import Test from './pages/Routes/Test';
 import { ThemeProvider } from './Context/ThemeContext';
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
-import PrivateAdminRoute from './PrivateAdminRoute';
+// import PrivateAdminRoute from './PrivateAdminRoute';
+
+function AppContent() {
+  const location = useLocation();
+  const language = "English";
+
+  const isAdminDashboard = location.pathname.startsWith("/admin/dashboard");
+
+  return (
+    <div className="app-wrapper">
+      {!isAdminDashboard && <Header />}
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home language={language} />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/learn" element={<Learn />} />
+          <Route path="/get-the-app" element={<GetTheApp />} />
+          <Route path="/fertility-screening" element={<FertilityScreening />} />
+          <Route path="/experts" element={<Experts />} />
+          <Route path="/test" element={<Test />} />
+
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              // <PrivateAdminRoute>
+              <AdminDashboard />
+              // </PrivateAdminRoute>
+            }
+          />
+
+          <Route path="/*" element={<h1>Page Not Found!</h1>} />
+        </Routes>
+      </main>
+      {!isAdminDashboard && <Footer />}
+    </div>
+  );
+}
 
 function App() {
-  const language = "English";
   return (
     <ThemeProvider>
-      <div className="app-wrapper">
-        <BrowserRouter>
-          <Header />
-          <main className='flex-grow-1'>
-            <Routes>
-              <Route path="/signup" element={<Signup />} /> {/* user */}
-              <Route path="/login" element={<Login />} /> {/* user */}
-              <Route path="/" element={<Home language={language} />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/programs" element={<Programs />} />
-              <Route path="/learn" element={<Learn />} />
-              <Route path="/get-the-app" element={<GetTheApp />} />
-              <Route path="/fertility-screening" element={<FertilityScreening />} />
-              <Route path="/experts" element={<Experts />} />
-              <Route path="/test" element={<Test />} />
-
-              <Route path="/admin" element={<AdminLogin />} />
-              <Route
-                path="/admin/dashboard"
-                element={
-                  // <PrivateAdminRoute>
-                    <AdminDashboard />
-                  /* </PrivateAdminRoute> */
-                }
-              />
-              <Route path="/*" element={<h1>Page Not Found!</h1>} />
-            </Routes>
-          </main>
-          <Footer />
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

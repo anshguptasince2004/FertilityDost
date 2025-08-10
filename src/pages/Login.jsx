@@ -24,7 +24,7 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       login(res.data.token);
       setMessage("Login successful!");
-      navigate("/");
+      navigate("/adminDashboard");
     } catch (err) {
       const backendError = err.response?.data?.error || "Login failed";
       setMessage(backendError);

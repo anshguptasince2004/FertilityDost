@@ -1,21 +1,15 @@
-import { Navigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateAdminRoute = ({ children }) => {
-  const token = localStorage.getItem("adminToken");
+const PrivateAdminRoute = () => {
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!token) return <Navigate to="/admin" replace />;
-
-  try {
-    const decoded = jwtDecode(token);
-    if (decoded.role !== "admin") {
-      return <Navigate to="/admin" replace />;
-    }
-  } catch (err) {
-    return <Navigate to="/admin" replace />;
+  if (!token || !user || user.role !== "admin") {
+    return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return <Outlet />;
 };
 
 export default PrivateAdminRoute;
