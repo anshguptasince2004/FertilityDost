@@ -1,36 +1,48 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { FaHome, FaPlus, FaVideo, FaUserMd } from "react-icons/fa";
-// import "./Sidebar.css";
 
-function Sidebar({ onSelect }) {
+const Sidebar = ({ setView, activeView }) => {
+  const menuItems = [
+    { label: "Home", view: "home" },
+    { label: "Add Program", view: "addProgram" },
+    { label: "Add Video", view: "addVideo" },
+    { label: "Add Doctor", view: "addDoctor" },
+  ];
+
   return (
-    <div className="sidebar text-light vh-100 p-3" style={{backgroundColor: '#4B0000'}}>
-      <h3 className="text-center mb-4">Admin Panel</h3>
-      <ul className="nav flex-column">
-        <li className="nav-item mb-2">
-          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("home")}>
-            <FaHome className="me-2" /> Home
-          </button>
-        </li>
-        <li className="nav-item mb-2">
-          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("addProgram")}>
-            <FaPlus className="me-2" /> Add Program
-          </button>
-        </li>
-        <li className="nav-item mb-2">
-          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("addVideo")}>
-            <FaVideo className="me-2" /> Add Video
-          </button>
-        </li>
-        <li className="nav-item">
-          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("addDoctor")}>
-            <FaUserMd className="me-2" /> Add Doctor
-          </button>
-        </li>
+    <div
+      style={{
+        width: "220px",
+        backgroundColor: "#610e0eff",
+        color: "#fff",
+        height: "100vh",
+        paddingTop: "20px",
+      }}
+    >
+      <h4 style={{ textAlign: "center", marginBottom: "30px" }}>Admin Panel</h4>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {menuItems.map((item) => (
+          <li
+            key={item.view}
+            onClick={() => setView(item.view)}
+            style={{
+              padding: "12px 20px",
+              cursor: "pointer",
+              backgroundColor:
+                activeView === item.view ? "#840303ff" : "transparent",
+              transition: "background-color 0.2s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#840303ff")}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor =
+                activeView === item.view ? "#840303ff" : "transparent")
+            }
+          >
+            {item.label}
+          </li>
+        ))}
       </ul>
     </div>
   );
-}
+};
 
 export default Sidebar;

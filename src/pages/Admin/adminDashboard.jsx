@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
-import doctorsData from "./docters";
+import doctorsData from "./doctors";
 import feedbackData from "./feedbacks";
+import AddProgramForm from "./AddProgramForm";
+import AddVideoForm from "./AddVideoForm";
+import AddDoctorForm from "./AddDoctorForm"; // NEW
 import { motion, AnimatePresence } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./adminDashboard.css";
@@ -28,9 +31,7 @@ function AdminDashboard() {
           }),
         ]);
 
-        if (!appRes.ok || !enrollRes.ok) {
-          throw new Error("Failed to load data");
-        }
+        if (!appRes.ok || !enrollRes.ok) throw new Error("Failed to load data");
 
         const appointmentsData = await appRes.json();
         const enrollmentsData = await enrollRes.json();
@@ -187,7 +188,7 @@ function AdminDashboard() {
 
   return (
     <div className="d-flex flex-column flex-md-row">
-      <Sidebar onSelect={setView} />
+      <Sidebar setView={setView} activeView={view} /> {/* updated */}
       <div className="flex-grow-1 p-4">
         {view === "home" && (
           <>
@@ -214,6 +215,9 @@ function AdminDashboard() {
             </div>
           </>
         )}
+        {view === "addProgram" && <AddProgramForm />}
+        {view === "addVideo" && <AddVideoForm />}
+        {view === "addDoctor" && <AddDoctorForm />} {/* NEW */}
       </div>
 
       <AnimatePresence>
