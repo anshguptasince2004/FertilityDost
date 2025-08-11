@@ -1,42 +1,36 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { FaHome, FaPlus, FaVideo, FaUserMd } from "react-icons/fa";
+// import "./Sidebar.css";
 
-export default function Sidebar({ activePage, setActivePage }) {
-  const menuItems = [
-    { key: "home", label: "Home" },
-    { key: "addProgram", label: "Add Program" },
-    { key: "addVideo", label: "Add Video" },
-  ];
-
+function Sidebar({ onSelect }) {
   return (
-    <div
-      style={{
-        width: "250px",
-        background: "#343a40",
-        color: "#fff",
-        padding: "20px",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <h3 style={{ marginBottom: "30px" }}>Admin Panel</h3>
-      {menuItems.map((item) => (
-        <button
-          key={item.key}
-          onClick={() => setActivePage(item.key)}
-          style={{
-            background: activePage === item.key ? "#495057" : "transparent",
-            color: "#fff",
-            textAlign: "left",
-            padding: "10px 15px",
-            border: "none",
-            borderRadius: "5px",
-            marginBottom: "5px",
-            cursor: "pointer",
-          }}
-        >
-          {item.label}
-        </button>
-      ))}
+    <div className="sidebar text-light vh-100 p-3" style={{backgroundColor: '#4B0000'}}>
+      <h3 className="text-center mb-4">Admin Panel</h3>
+      <ul className="nav flex-column">
+        <li className="nav-item mb-2">
+          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("home")}>
+            <FaHome className="me-2" /> Home
+          </button>
+        </li>
+        <li className="nav-item mb-2">
+          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("addProgram")}>
+            <FaPlus className="me-2" /> Add Program
+          </button>
+        </li>
+        <li className="nav-item mb-2">
+          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("addVideo")}>
+            <FaVideo className="me-2" /> Add Video
+          </button>
+        </li>
+        <li className="nav-item">
+          <button className="btn btn-link text-light w-100 text-start" onClick={() => onSelect("addDoctor")}>
+            <FaUserMd className="me-2" /> Add Doctor
+          </button>
+        </li>
+      </ul>
     </div>
   );
 }
+
+export default Sidebar;

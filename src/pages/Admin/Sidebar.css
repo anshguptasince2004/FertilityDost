@@ -1,0 +1,30 @@
+.sidebar {
+  width: 220px;
+  background: #222;
+  color: white;
+  padding: 1rem;
+}
+
+.sidebar-title {
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-menu li span {
+  margin-left: 0.8rem;
+  font-size: 1rem;
+}

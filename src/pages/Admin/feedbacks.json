@@ -1,0 +1,17 @@
+[
+  { "name": "John Doe", "review": "Excellent service!", "rating": 5 },
+  { "name": "Jane Smith", "review": "Very helpful doctors.", "rating": 4 },
+  { "name": "Robert Lee", "review": "Quick and easy appointments.", "rating": 5 },
+  { "name": "Emily Davis", "review": "Loved the programs offered.", "rating": 5 },
+  { "name": "Michael Brown", "review": "Satisfied with my consultation.", "rating": 4 },
+  { "name": "Sarah Wilson", "review": "Good app interface.", "rating": 4 },
+  { "name": "David Taylor", "review": "Very professional staff.", "rating": 5 },
+  { "name": "Linda Johnson", "review": "Affordable and effective.", "rating": 5 },
+  { "name": "Chris Miller", "review": "Highly recommend!", "rating": 5 },
+  { "name": "Nancy White", "review": "Doctors are very patient.", "rating": 4 },
+  { "name": "Daniel Hall", "review": "Booking process is simple.", "rating": 5 },
+  { "name": "Laura Allen", "review": "Nice experience overall.", "rating": 4 },
+  { "name": "Mark Young", "review": "Very efficient.", "rating": 5 },
+  { "name": "Karen King", "review": "Friendly and supportive staff.", "rating": 5 },
+  { "name": "James Scott", "review": "Would use again.", "rating": 4 }
+]

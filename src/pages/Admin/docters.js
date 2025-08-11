@@ -1,28 +1,36 @@
 const doctors = [
   {
     id: 1,
-    name: "Dr. Priya Sharma",
-    specialization: "Fertility Specialist",
-    location: "Mumbai, India",
+    name: "Dr. Ananya Sharma",
+    email: "ananya.sharma@example.com",
+    phone: "+91 9876543210",
+    specialization: "Gynecologist",
+    photo: "https://randomuser.me/api/portraits/women/44.jpg"
   },
   {
     id: 2,
-    name: "Dr. Arjun Mehta",
-    specialization: "Fertility Specialist",
-    location: "Delhi, India",
+    name: "Dr. Rahul Mehta",
+    email: "rahul.mehta@example.com",
+    phone: "+91 9123456789",
+    specialization: "Andrologist",
+    photo: "https://randomuser.me/api/portraits/men/32.jpg"
   },
   {
     id: 3,
-    name: "Dr. Arjun Mehta",
+    name: "Dr. Priya Kapoor",
+    email: "priya.kapoor@example.com",
+    phone: "+91 9812345678",
     specialization: "Fertility Specialist",
-    location: "Delhi, India",
+    photo: "https://randomuser.me/api/portraits/women/68.jpg"
   },
   {
     id: 4,
-    name: "Dr. Arjun Mehta",
-    specialization: "Fertility Specialist",
-    location: "Delhi, India",
-  },
+    name: "Dr. Rahul Mehta",
+    email: "rahul.mehta@example.com",
+    phone: "+91 9123456789",
+    specialization: "Andrologist",
+    photo: "https://randomuser.me/api/portraits/men/35.jpg"
+  }
 ];
 
 export default doctors;
