@@ -4,7 +4,7 @@ const doctors = [
     name: "Dr. Ananya Sharma",
     email: "ananya.sharma@example.com",
     phone: "+91 9876543210",
-    specialization: "Gynecologist",
+    specialization: "Andrologist",
     photo: "https://randomuser.me/api/portraits/women/44.jpg"
   },
   {
@@ -21,7 +21,7 @@ const doctors = [
     email: "priya.kapoor@example.com",
     phone: "+91 9812345678",
     specialization: "Fertility Specialist",
-    photo: "https://randomuser.me/api/portraits/women/68.jpg"
+    photo: "https://randomuser.me/api/portraits/women/12.jpg"
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const doctors = [
     email: "rahul.mehta@example.com",
     phone: "+91 9123456789",
     specialization: "Andrologist",
-    photo: "https://randomuser.me/api/portraits/men/35.jpg"
+    photo: "https://randomuser.me/api/portraits/men/28.jpg"
   }
 ];
 

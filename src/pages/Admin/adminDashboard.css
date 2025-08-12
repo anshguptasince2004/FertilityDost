@@ -1,3 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: rgb(255, 246, 246);
+}
+
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  align-items: flex-start; 
+}
+
+.main-content {
+  flex-grow: 1;
+  min-height: 100vh;
+  background-color: rgb(255, 246, 246);
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -42,6 +63,9 @@
   overflow-x: hidden;
 }
 @media (max-width: 767px) {
+  .main-content {
+    width: 100% !important;
+  }
   .modal-content {
     max-width: 95%;
   }
@@ -53,4 +77,14 @@
     flex: 1 1 100%;
   }
 }
+.doctor-card, .feedback-card {
+  transition: background-color 0.3s ease;
+}
 
+.doctor-card:hover, .feedback-card:hover {
+  background-color: #f8f9fa;
+}
+
+.flex-grow-1 {
+  overflow-x: hidden;
+}

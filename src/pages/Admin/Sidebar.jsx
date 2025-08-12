@@ -14,12 +14,16 @@ const Sidebar = ({ setView, activeView }) => {
         width: "220px",
         backgroundColor: "#610e0eff",
         color: "#fff",
-        height: "100vh",
         paddingTop: "20px",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        minHeight: "100vh",
+        boxSizing: "border-box",
       }}
     >
       <h4 style={{ textAlign: "center", marginBottom: "30px" }}>Admin Panel</h4>
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <ul style={{ listStyle: "none", padding: 0, flex: 1 }}>
         {menuItems.map((item) => (
           <li
             key={item.view}
@@ -31,7 +35,9 @@ const Sidebar = ({ setView, activeView }) => {
                 activeView === item.view ? "#840303ff" : "transparent",
               transition: "background-color 0.2s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#840303ff")}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "#840303ff")
+            }
             onMouseLeave={(e) =>
               (e.currentTarget.style.backgroundColor =
                 activeView === item.view ? "#840303ff" : "transparent")

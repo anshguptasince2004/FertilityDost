@@ -7,7 +7,7 @@ export default function AddDoctorForm({ onAddDoctor }) {
   const [specialization, setSpecialization] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [description, setDescription] = useState("");
   const [photoFile, setPhotoFile] = useState(null);
   const [preview, setPreview] = useState("");
   const [msg, setMsg] = useState("");
@@ -25,23 +25,30 @@ export default function AddDoctorForm({ onAddDoctor }) {
   };
 
   const resetForm = () => {
-    setName(""); setSpecialization(""); setPhone(""); setEmail(""); setPhotoUrl(""); setPhotoFile(null); setPreview("");
+    setName("");
+    setSpecialization("");
+    setPhone("");
+    setEmail("");
+    setDescription("");
+    setPhotoFile(null);
+    setPreview("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !specialization || !phone || !email) {
+    if (!name || !specialization || !phone || !email || !description) {
       setMsg("Please fill all required fields.");
       return;
     }
 
-    const finalPhoto = preview || photoUrl || placeholder;
+    const finalPhoto = preview || placeholder;
     const newDoctor = {
       id: Date.now(),
       name,
       specialization,
       phone,
       email,
+      description,
       photo: finalPhoto,
     };
 
@@ -59,34 +66,78 @@ export default function AddDoctorForm({ onAddDoctor }) {
         <div className="row g-2">
           <div className="col-md-6 mb-2">
             <label className="form-label">Name</label>
-            <input className="form-control" value={name} onChange={(e) => setName(e.target.value)} required />
+            <input
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
           <div className="col-md-6 mb-2">
             <label className="form-label">Specialization</label>
-            <input className="form-control" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+            <input
+              className="form-control"
+              value={specialization}
+              onChange={(e) => setSpecialization(e.target.value)}
+              required
+            />
           </div>
           <div className="col-md-6 mb-2">
             <label className="form-label">Phone</label>
-            <input className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+            <input
+              className="form-control"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+            />
           </div>
           <div className="col-md-6 mb-2">
             <label className="form-label">Email</label>
-            <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <input
+              type="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
           <div className="col-12 mb-2">
-            <label className="form-label">Photo URL (optional)</label>
-            <input className="form-control" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} placeholder="https://..." />
+            <label className="form-label">Doctor Description</label>
+            <textarea
+              className="form-control"
+              rows="3"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            ></textarea>
           </div>
 
           <div className="col-12 mb-2">
-            <label className="form-label">Or upload photo</label>
-            <input type="file" accept="image/*" className="form-control" onChange={handleFile} />
+            <label className="form-label">Upload Doctor Photo</label>
+            <input
+              type="file"
+              accept="image/*"
+              className="form-control"
+              onChange={handleFile}
+            />
           </div>
 
           <div className="col-12 mb-3 d-flex align-items-center gap-3">
-            <div style={{ width: 80, height: 80, borderRadius: 8, overflow: "hidden", border: "1px solid #ddd" }}>
-              <img src={preview || photoUrl || placeholder} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <div
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: 8,
+                overflow: "hidden",
+                border: "1px solid #ddd",
+              }}
+            >
+              <img
+                src={preview || placeholder}
+                alt="preview"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
             </div>
             <div className="text-muted">Preview</div>
           </div>
