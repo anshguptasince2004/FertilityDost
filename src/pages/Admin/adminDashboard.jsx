@@ -18,6 +18,7 @@ function AppointmentsPage({ appointments, setView }) {
           <table className="table table-striped table-hover">
             <thead className="table-dark">
               <tr>
+                <th>Sr no.</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -28,8 +29,9 @@ function AppointmentsPage({ appointments, setView }) {
               </tr>
             </thead>
             <tbody>
-              {appointments.map((a) => (
+              {appointments.map((a, index) => (
                 <tr key={a._id}>
+                  <td>{index + 1}</td>
                   <td>{a.firstName} {a.lastName}</td>
                   <td>{a.email}</td>
                   <td>{a.mobile}</td>
@@ -40,10 +42,11 @@ function AppointmentsPage({ appointments, setView }) {
                 </tr>
               ))}
             </tbody>
+
           </table>
         </div>
       ) : <p>No appointments found.</p>}
-      
+
       <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
         ← Back
       </button>
@@ -60,6 +63,7 @@ function ProgramsPage({ enrollments, setView }) {
           <table className="table table-striped table-hover">
             <thead className="table-dark">
               <tr>
+                <th>Sr no.</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -68,8 +72,9 @@ function ProgramsPage({ enrollments, setView }) {
               </tr>
             </thead>
             <tbody>
-              {enrollments.map((e) => (
+              {enrollments.map((e, index) => (
                 <tr key={e._id}>
+                  <td>{index + 1}</td>
                   <td>{e.firstName} {e.lastName}</td>
                   <td>{e.email}</td>
                   <td>{e.mobile}</td>
@@ -81,7 +86,7 @@ function ProgramsPage({ enrollments, setView }) {
           </table>
         </div>
       ) : <p>No enrollments found.</p>}
-      
+
       <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
         ← Back
       </button>
@@ -94,32 +99,45 @@ function DoctorsPage({ setView }) {
     <div>
       <h3 className="mb-3">Doctors List</h3>
       <div style={{ overflowY: "auto" }}>
-        {doctorsData.map((doc) => (
-          <motion.div
-            key={doc.id}
-            className="card shadow-sm mb-3 doctor-card"
-            whileHover={{ backgroundColor: "#f8f9fa" }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="row g-0">
-              <div className="col-4">
-                <img
-                  src={doc.photo}
-                  className="img-fluid rounded-start"
-                  alt={doc.name}
-                />
-              </div>
-              <div className="col-8">
-                <div className="card-body">
-                  <h5>{doc.name}</h5>
-                  <p className="mb-1">{doc.specialization}</p>
-                  <small>Email: {doc.email}</small><br />
-                  <small>Phone: {doc.phone}</small>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+        <table className="table table-hover align-middle">
+          <thead className="table-dark">
+            <tr>
+              <th>Sr no.</th>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Specialization</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {doctorsData.map((doc, index) => (
+              <motion.tr
+                key={doc.id}
+                whileHover={{ backgroundColor: "#ee1818ff"}}
+                transition={{ duration: 0.2 }}
+              >
+                <td>{index + 1}</td>
+                <td>
+                  <img
+                    src={doc.photo}
+                    alt={doc.name}
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      objectFit: "cover",
+                      borderRadius: "6px"
+                    }}
+                  />
+                </td>
+                <td>{doc.name}</td>
+                <td>{doc.specialization}</td>
+                <td>{doc.email}</td>
+                <td>{doc.phone}</td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
@@ -134,19 +152,32 @@ function FeedbackPage({ setView }) {
     <div>
       <h3 className="mb-3">User Feedbacks</h3>
       <div style={{ overflowY: "auto" }}>
-        {feedbackData.map((fb, index) => (
-          <motion.div
-            key={index}
-            className="card p-3 shadow-sm mb-3 feedback-card"
-            whileHover={{ backgroundColor: "#f8f9fa" }}
-            transition={{ duration: 0.2 }}
-          >
-            <h6>{fb.name}</h6>
-            <p>"{fb.review}"</p>
-            <div>{"⭐".repeat(fb.rating)}</div>
-          </motion.div>
-        ))}
+        <table className="table table-hover align-middle">
+          <thead className="table-dark">
+            <tr>
+              <th>Sr no.</th>
+              <th>Name</th>
+              <th>Review</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            {feedbackData.map((fb, index) => (
+              <motion.tr
+                key={index}
+                whileHover={{ backgroundColor: "#f8f9fa"}}
+                transition={{ duration: 0.2 }}
+              >
+                <td>{index + 1}</td>
+                <td>{fb.name}</td>
+                <td>"{fb.review}"</td>
+                <td>{"⭐".repeat(fb.rating)}</td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+
       <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
         ← Back
       </button>
