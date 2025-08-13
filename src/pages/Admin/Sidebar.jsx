@@ -1,5 +1,3 @@
-import React from "react";
-
 const Sidebar = ({ setView, activeView }) => {
   const menuItems = [
     { label: "Home", view: "home" },
@@ -18,7 +16,7 @@ const Sidebar = ({ setView, activeView }) => {
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        minHeight: "100vh",
+        minHeight: "115vh",
         boxSizing: "border-box",
       }}
     >

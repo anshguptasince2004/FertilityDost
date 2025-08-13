@@ -88,3 +88,9 @@ body {
 .flex-grow-1 {
   overflow-x: hidden;
 }
+.main-content {
+  flex-grow: 1;
+  min-height: 100vh;
+  background-color: rgb(255, 246, 246);
+  overflow-x: hidden; 
+}

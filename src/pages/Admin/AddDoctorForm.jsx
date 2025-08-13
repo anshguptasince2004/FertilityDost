@@ -59,7 +59,7 @@ export default function AddDoctorForm({ onAddDoctor }) {
   };
 
   return (
-    <div className="card p-4 shadow-sm">
+    <div className="card p-4 shadow-sm" style={{ maxWidth: "1000px", margin: "0 auto", width: "100%" }}>
       <h3 className="mb-3">Add Doctor</h3>
       {msg && <div className="alert alert-success">{msg}</div>}
       <form onSubmit={handleSubmit}>
