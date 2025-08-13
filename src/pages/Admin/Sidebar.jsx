@@ -15,8 +15,8 @@ const Sidebar = ({ setView, activeView }) => {
         paddingTop: "20px",
         display: "flex",
         flexDirection: "column",
-        height: "100%",
-        minHeight: "115vh",
+        flex: "0 0 220px",   
+        alignSelf: "stretch",
         boxSizing: "border-box",
       }}
     >
@@ -37,8 +37,8 @@ const Sidebar = ({ setView, activeView }) => {
               (e.currentTarget.style.backgroundColor = "#840303ff")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                activeView === item.view ? "#840303ff" : "transparent")
+            (e.currentTarget.style.backgroundColor =
+              activeView === item.view ? "#840303ff" : "transparent")
             }
           >
             {item.label}
