@@ -5,7 +5,8 @@ const doctors = [
     email: "ananya.sharma@example.com",
     phone: "+91 9876543210",
     specialization: "Andrologist",
-    photo: "https://randomuser.me/api/portraits/women/44.jpg"
+    photo: "https://randomuser.me/api/portraits/women/44.jpg",
+    status: "grey"
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ const doctors = [
     email: "rahul.mehta@example.com",
     phone: "+91 9123456789",
     specialization: "Andrologist",
-    photo: "https://randomuser.me/api/portraits/men/32.jpg"
+    photo: "https://randomuser.me/api/portraits/men/32.jpg",
+    status: "grey"
   },
   {
     id: 3,
@@ -21,7 +23,8 @@ const doctors = [
     email: "priya.kapoor@example.com",
     phone: "+91 9812345678",
     specialization: "Fertility Specialist",
-    photo: "https://randomuser.me/api/portraits/women/12.jpg"
+    photo: "https://randomuser.me/api/portraits/women/12.jpg",
+    status: "grey"
   },
   {
     id: 4,
@@ -29,7 +32,8 @@ const doctors = [
     email: "rahul.mehta@example.com",
     phone: "+91 9123456789",
     specialization: "Andrologist",
-    photo: "https://randomuser.me/api/portraits/men/28.jpg"
+    photo: "https://randomuser.me/api/portraits/men/28.jpg",
+    status: "grey"
   }
 ];
 

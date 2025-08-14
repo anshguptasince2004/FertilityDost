@@ -80,3 +80,7 @@ body {
   background-color: rgb(255, 246, 246);
   overflow-x: hidden; 
 }
+
+.dropdown-toggle::after {
+  display: none !important;
+}

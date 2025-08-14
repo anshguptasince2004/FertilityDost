@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
-import doctorsData from "./doctors";
+import initialDoctors from "./doctors";
 import feedbackData from "./feedbacks";
 import AddProgramForm from "./AddProgramForm";
 import AddVideoForm from "./AddVideoForm";
@@ -42,7 +42,6 @@ function AppointmentsPage({ appointments, setView }) {
                 </tr>
               ))}
             </tbody>
-
           </table>
         </div>
       ) : <p>No appointments found.</p>}
@@ -95,6 +94,45 @@ function ProgramsPage({ enrollments, setView }) {
 }
 
 function DoctorsPage({ setView }) {
+  const [doctors, setDoctors] = useState(
+    initialDoctors.map(d => ({ ...d, status: d.status || "unset" }))
+  );
+  const [editDoctor, setEditDoctor] = useState(null);
+
+  const updateDoctorStatus = async (id, status) => {
+    const updated = doctors.map(doc =>
+      doc.id === id ? { ...doc, status } : doc
+    );
+    setDoctors(updated);
+
+    await fetch(`/api/admin/doctors/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    const updated = doctors.map(doc =>
+      doc.id === editDoctor.id ? editDoctor : doc
+    );
+    setDoctors(updated);
+    setEditDoctor(null);
+
+    await fetch(`/api/admin/doctors/${editDoctor.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editDoctor),
+    });
+  };
+
+  const borderColor = (status) => {
+    if (status === "active") return "2.5px solid green";
+    if (status === "inactive") return "2.5px solid red";
+    return "2.5px solid gray";
+  };
+
   return (
     <div>
       <h3 className="mb-3">Doctors List</h3>
@@ -108,13 +146,14 @@ function DoctorsPage({ setView }) {
               <th>Specialization</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {doctorsData.map((doc, index) => (
+            {doctors.map((doc, index) => (
               <motion.tr
                 key={doc.id}
-                whileHover={{ backgroundColor: "#ee1818ff"}}
+                whileHover={{ backgroundColor: "#f8f9fa" }}
                 transition={{ duration: 0.2 }}
               >
                 <td>{index + 1}</td>
@@ -126,7 +165,8 @@ function DoctorsPage({ setView }) {
                       width: "60px",
                       height: "60px",
                       objectFit: "cover",
-                      borderRadius: "6px"
+                      borderRadius: "6px",
+                      border: borderColor(doc.status),
                     }}
                   />
                 </td>
@@ -134,13 +174,112 @@ function DoctorsPage({ setView }) {
                 <td>{doc.specialization}</td>
                 <td>{doc.email}</td>
                 <td>{doc.phone}</td>
+                <td>
+                  <div className="dropdown">
+                    <button
+                      className="btn btn-light dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      ⋮
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <button
+                          className="dropdown-item text-success"
+                          onClick={() => updateDoctorStatus(doc.id, "active")}
+                        >
+                          Active
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="dropdown-item text-danger"
+                          onClick={() => updateDoctorStatus(doc.id, "inactive")}
+                        >
+                          Inactive
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="dropdown-item text-warning"
+                          onClick={() => setEditDoctor({ ...doc })}
+                        >
+                          Edit Details
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
               </motion.tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
+      {/* Edit Doctor Modal */}
+      {editDoctor && (
+        <div className="modal show d-block" tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content p-3">
+              <h5>Edit Doctor</h5>
+              <form onSubmit={handleEditSubmit}>
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  value={editDoctor.name}
+                  onChange={(e) =>
+                    setEditDoctor({ ...editDoctor, name: e.target.value })
+                  }
+                  placeholder="Name"
+                />
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  value={editDoctor.specialization}
+                  onChange={(e) =>
+                    setEditDoctor({ ...editDoctor, specialization: e.target.value })
+                  }
+                  placeholder="Specialization"
+                />
+                <input
+                  type="email"
+                  className="form-control mb-2"
+                  value={editDoctor.email}
+                  onChange={(e) =>
+                    setEditDoctor({ ...editDoctor, email: e.target.value })
+                  }
+                  placeholder="Email"
+                />
+                <input
+                  type="text"
+                  className="form-control mb-2"
+                  value={editDoctor.phone}
+                  onChange={(e) =>
+                    setEditDoctor({ ...editDoctor, phone: e.target.value })
+                  }
+                  placeholder="Phone"
+                />
+                <div className="d-flex justify-content-end mt-3">
+                  <button
+                    type="button"
+                    className="btn btn-secondary me-2"
+                    onClick={() => setEditDoctor(null)}
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" className="btn btn-primary">
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <button className="btn btn-danger mb-3 mt-3" onClick={() => setView("home")}>
         ← Back
       </button>
     </div>
@@ -185,13 +324,11 @@ function FeedbackPage({ setView }) {
   );
 }
 
-
 function AdminDashboard() {
   const [view, setView] = useState("home");
   const [appointments, setAppointments] = useState([]);
   const [enrollments, setEnrollments] = useState([]);
   const [error, setError] = useState("");
-
   const token = localStorage.getItem("adminToken");
 
   useEffect(() => {
@@ -230,7 +367,7 @@ function AdminDashboard() {
               {[
                 { label: "Appointments", count: appointments.length, viewKey: "appointments" },
                 { label: "Programs", count: enrollments.length, viewKey: "programs" },
-                { label: "Doctors", count: doctorsData.length, viewKey: "doctors" },
+                { label: "Doctors", count: initialDoctors.length, viewKey: "doctors" },
                 { label: "Feedbacks", count: feedbackData.length, viewKey: "feedback" },
               ].map((item, idx) => (
                 <div key={idx} className="col-6 col-md-3">
