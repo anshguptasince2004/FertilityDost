@@ -146,7 +146,7 @@ function DoctorsPage({ setView }) {
               <th>Specialization</th>
               <th>Email</th>
               <th>Phone</th>
-              <th>Actions</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -218,7 +218,6 @@ function DoctorsPage({ setView }) {
         </table>
       </div>
 
-      {/* Edit Doctor Modal */}
       {editDoctor && (
         <div className="modal show d-block" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
