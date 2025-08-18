@@ -8,6 +8,7 @@ import AddDoctorForm from "./AddDoctorForm";
 import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./adminDashboard.css";
+import { FaUser } from "react-icons/fa";
 
 function AppointmentsPage({ appointments, setView }) {
   return (
@@ -358,39 +359,47 @@ function AdminDashboard() {
   return (
     <div className="dashboard-wrapper">
       <Sidebar setView={setView} activeView={view} />
-      <div className="main-content p-4">
-        {view === "home" && (
-          <>
-            <h2 className="mb-4">Welcome, Admin</h2>
-            <div className="row g-4">
-              {[
-                { label: "Appointments", count: appointments.length, viewKey: "appointments" },
-                { label: "Programs", count: enrollments.length, viewKey: "programs" },
-                { label: "Doctors", count: initialDoctors.length, viewKey: "doctors" },
-                { label: "Feedbacks", count: feedbackData.length, viewKey: "feedback" },
-              ].map((item, idx) => (
-                <div key={idx} className="col-6 col-md-3">
-                  <motion.div
-                    className="dashboard-card text-center p-4 shadow-sm rounded"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                    onClick={() => setView(item.viewKey)}
-                  >
-                    <h5>{item.label}</h5>
-                    <h3>{item.count}</h3>
-                  </motion.div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-        {view === "appointments" && <AppointmentsPage appointments={appointments} setView={setView} />}
-        {view === "programs" && <ProgramsPage enrollments={enrollments} setView={setView} />}
-        {view === "doctors" && <DoctorsPage setView={setView} />}
-        {view === "feedback" && <FeedbackPage setView={setView} />}
-        {view === "addProgram" && <AddProgramForm />}
-        {view === "addVideo" && <AddVideoForm />}
-        {view === "addDoctor" && <AddDoctorForm />}
+      <div className="main-content p-0">
+        <header className="d-flex justify-content-end align-items-center px-4 py-2 bg-white shadow-sm">
+          <span className="me-3">Hello, Admin</span>
+          <button className="btn btn-light rounded-circle">
+            <FaUser />
+          </button>
+        </header>
+        <div className="p-4">
+          {view === "home" && (
+            <>
+              <h2 className="mb-4">Welcome to Dashboard!</h2>
+              <div className="row g-4">
+                {[
+                  { label: "Appointments", count: appointments.length, viewKey: "appointments" },
+                  { label: "Programs", count: enrollments.length, viewKey: "programs" },
+                  { label: "Doctors", count: initialDoctors.length, viewKey: "doctors" },
+                  { label: "Feedbacks", count: feedbackData.length, viewKey: "feedback" },
+                ].map((item, idx) => (
+                  <div key={idx} className="col-6 col-md-3">
+                    <motion.div
+                      className="dashboard-card text-center p-4 shadow-sm rounded"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
+                      onClick={() => setView(item.viewKey)}
+                    >
+                      <h5>{item.label}</h5>
+                      <h3>{item.count}</h3>
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {view === "appointments" && <AppointmentsPage appointments={appointments} setView={setView} />}
+          {view === "programs" && <ProgramsPage enrollments={enrollments} setView={setView} />}
+          {view === "doctors" && <DoctorsPage setView={setView} />}
+          {view === "feedback" && <FeedbackPage setView={setView} />}
+          {view === "addProgram" && <AddProgramForm />}
+          {view === "addVideo" && <AddVideoForm />}
+          {view === "addDoctor" && <AddDoctorForm />}
+        </div>
       </div>
     </div>
   );
