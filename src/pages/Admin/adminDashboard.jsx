@@ -8,7 +8,8 @@ import AddDoctorForm from "./AddDoctorForm";
 import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./adminDashboard.css";
-import { FaUser } from "react-icons/fa";
+
+import { FaCalendarAlt, FaBook, FaUserMd, FaComments, FaUser } from "react-icons/fa";
 
 function AppointmentsPage({ appointments, setView }) {
   return (
@@ -356,6 +357,14 @@ function AdminDashboard() {
     fetchData();
   }, [token]);
 
+  // card list with icons
+  const dashboardItems = [
+    { label: "Appointments", count: appointments.length, viewKey: "appointments", icon: <FaCalendarAlt />, color: "#007bff" },
+    { label: "Programs", count: enrollments.length, viewKey: "programs", icon: <FaBook />, color: "#28a745" },
+    { label: "Doctors", count: initialDoctors.length, viewKey: "doctors", icon: <FaUserMd />, color: "#ffc107" },
+    { label: "Feedbacks", count: feedbackData.length, viewKey: "feedback", icon: <FaComments />, color: "#dc3545" },
+  ];
+
   return (
     <div className="dashboard-wrapper">
       <Sidebar setView={setView} activeView={view} />
@@ -371,21 +380,22 @@ function AdminDashboard() {
             <>
               <h2 className="mb-4">Welcome to Dashboard!</h2>
               <div className="row g-4">
-                {[
-                  { label: "Appointments", count: appointments.length, viewKey: "appointments" },
-                  { label: "Programs", count: enrollments.length, viewKey: "programs" },
-                  { label: "Doctors", count: initialDoctors.length, viewKey: "doctors" },
-                  { label: "Feedbacks", count: feedbackData.length, viewKey: "feedback" },
-                ].map((item, idx) => (
+                {dashboardItems.map((item, idx) => (
                   <div key={idx} className="col-6 col-md-3">
                     <motion.div
-                      className="dashboard-card text-center p-4 shadow-sm rounded"
+                      className="dashboard-card d-flex align-items-center p-3 shadow-sm rounded"
+                      style={{ borderLeft: `4px solid ${item.color}` }}
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.2 }}
                       onClick={() => setView(item.viewKey)}
                     >
-                      <h5>{item.label}</h5>
-                      <h3>{item.count}</h3>
+                      <div className="dashboard-card-icon me-3" style={{ color: item.color }}>
+                        {item.icon}
+                      </div>
+                      <div className="text-start">
+                        <h6 className="card-label mb-1">{item.label}</h6>
+                        <h3 className="mb-0">{item.count}</h3>
+                      </div>
                     </motion.div>
                   </div>
                 ))}

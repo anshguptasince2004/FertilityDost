@@ -1,47 +1,32 @@
+import { FaHome, FaPlusCircle, FaVideo, FaUserMd } from "react-icons/fa";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import "./Sidebar.css";
+
 const Sidebar = ({ setView, activeView }) => {
   const menuItems = [
-    { label: "Home", view: "home" },
-    { label: "Add Program", view: "addProgram" },
-    { label: "Add Video", view: "addVideo" },
-    { label: "Add Doctor", view: "addDoctor" },
+    { label: "Dashboard", view: "home", icon: <FaHome /> },
+    { label: "Add Program", view: "addProgram", icon: <FaPlusCircle /> },
+    { label: "Add Video", view: "addVideo", icon: <FaVideo /> },
+    { label: "Add Doctor", view: "addDoctor", icon: <FaUserMd /> },
   ];
 
   return (
-    <div
-      style={{
-        width: "220px",
-        backgroundColor: "#610e0eff",
-        color: "#fff",
-        paddingTop: "20px",
-        display: "flex",
-        flexDirection: "column",
-        flex: "0 0 220px",   
-        alignSelf: "stretch",
-        boxSizing: "border-box",
-      }}
-    >
-      <h4 style={{ textAlign: "center", marginBottom: "30px" }}>Admin Panel</h4>
-      <ul style={{ listStyle: "none", padding: 0, flex: 1 }}>
+    <div className="sidebar">
+      <h4 className="sidebar-title">Admin Panel</h4>
+      <ul className="sidebar-menu">
         {menuItems.map((item) => (
           <li
             key={item.view}
             onClick={() => setView(item.view)}
-            style={{
-              padding: "12px 20px",
-              cursor: "pointer",
-              backgroundColor:
-                activeView === item.view ? "#840303ff" : "transparent",
-              transition: "background-color 0.2s ease",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "#840303ff")
-            }
-            onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              activeView === item.view ? "#840303ff" : "transparent")
-            }
+            className={`sidebar-item ${
+              activeView === item.view ? "active" : ""
+            }`}
           >
-            {item.label}
+            <div className="sidebar-item-left">
+              <span className="sidebar-icon">{item.icon}</span>
+              <span className="sidebar-label">{item.label}</span>
+            </div>
+            <MdKeyboardArrowRight className="sidebar-arrow" />
           </li>
         ))}
       </ul>
