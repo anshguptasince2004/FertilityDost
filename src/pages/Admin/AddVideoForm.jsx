@@ -39,7 +39,7 @@ function AddVideoForm() {
             onChange={(e) => setFile(e.target.files[0])}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-success">
           Add Video
         </button>
       </form>
