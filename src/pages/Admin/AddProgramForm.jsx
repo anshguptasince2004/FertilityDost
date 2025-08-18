@@ -27,8 +27,6 @@ function AddProgramForm() {
       subImages,
     });
 
-    // Here you can send formData to backend using fetch or axios
-
     setName("");
     setPrice("");
     setDescription("");
@@ -39,43 +37,46 @@ function AddProgramForm() {
   return (
     <motion.div
       className="card p-4 shadow-sm"
+      style={{ borderRadius: "12px" }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
       <h3 className="mb-3">Add New Program</h3>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <div className="mb-3">
-          <label className="form-label">Program Name</label>
-          <input
-            type="text"
-            className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <label className="form-label">Program Name<span className="text-danger">*</span></label>
+            <input
+              type="text"
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="col-md-6">
+            <label className="form-label">Price<span className="text-danger">*</span></label>
+            <input
+              type="number"
+              className="form-control"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </div>
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Price</label>
-          <input
-            type="number"
-            className="form-control"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Program Description</label>
+          <label htmlFor="description" className="form-label">Description</label>
           <textarea
             className="form-control"
+            id="description"
             rows="4"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
+            placeholder="Enter description..."
           ></textarea>
         </div>
+
 
         <div className="mb-3">
           <label className="form-label">Upload Program Video</label>
@@ -98,7 +99,7 @@ function AddProgramForm() {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-danger px-4">
           Add Program
         </button>
       </form>
