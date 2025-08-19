@@ -8,105 +8,163 @@ import AddDoctorForm from "./AddDoctorForm";
 import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./adminDashboard.css";
+import { FaCalendarAlt, FaBook, FaUserMd, FaComments, FaUser, FaPlus } from "react-icons/fa";
 
-import { FaCalendarAlt, FaBook, FaUserMd, FaComments, FaUser } from "react-icons/fa";
-
-function AppointmentsPage({ appointments, setView }) {
+// ✅ Reusable wrapper for all pages
+function TableWrapper({ title, children, setView, addBtn }) {
   return (
-    <div>
-      <h3 className="mb-3">Appointments</h3>
-      {appointments.length ? (
-        <div style={{ overflowY: "auto" }}>
-          <table className="table table-striped table-hover">
-            <thead className="table-dark">
-              <tr>
-                <th>Sr no.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Gender</th>
-                <th>Call Type</th>
-                <th>Slot Date</th>
-                <th>Slot Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {appointments.map((a, index) => (
-                <tr key={a._id}>
-                  <td>{index + 1}</td>
-                  <td>{a.firstName} {a.lastName}</td>
-                  <td>{a.email}</td>
-                  <td>{a.mobile}</td>
-                  <td>{a.gender}</td>
-                  <td>{a.callType}</td>
-                  <td>{a.slotDate}</td>
-                  <td>{a.slotTime}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : <p>No appointments found.</p>}
-
-      <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
+    <div className="card shadow p-4 mb-4" style={{ borderRadius: "10px" }}>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h3 className="m-0">{title}</h3>
+        {addBtn && (
+          <button
+            className="btn btn-success btn-sm d-flex align-items-center px-3 py-1"
+            style={{ width: "auto" }}
+            onClick={addBtn.onClick}
+          >
+            <FaPlus className="me-2" /> {addBtn.label}
+          </button>
+        )}
+      </div>
+      {children}
+      <button
+        className="btn btn-danger mt-4 w-100"
+        onClick={() => setView("home")}
+      >
         ← Back
       </button>
     </div>
+  );
+}
+
+// ✅ Reusable Table with Pagination (5 rows per page)
+function PaginatedTable({ data, columns, renderRow }) {
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 5;
+  const totalPages = Math.ceil(data.length / rowsPerPage);
+
+  const startIndex = (page - 1) * rowsPerPage;
+  const paginatedData = data.slice(startIndex, startIndex + rowsPerPage);
+
+  return (
+    <>
+      <div className="table-responsive">
+        <table className="table table-bordered table-hover align-middle">
+          <thead className="bg-light">
+            <tr className="fw-bold text-secondary">
+              {columns.map((col, idx) => (
+                <th key={idx}>{col}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>{paginatedData.map(renderRow)}</tbody>
+        </table>
+      </div>
+      {data.length > rowsPerPage && (
+        <div className="d-flex justify-content-end align-items-center mt-2">
+          <button
+            className="btn btn-light btn-sm me-2"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+          >
+            ← Prev
+          </button>
+          <span className="me-2">
+            Page {page} of {totalPages}
+          </span>
+          <button
+            className="btn btn-light btn-sm"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+          >
+            Next →
+          </button>
+        </div>
+      )}
+    </>
+  );
+}
+
+function AppointmentsPage({ appointments, setView }) {
+  return (
+    <TableWrapper title="Appointments" setView={setView}>
+      {appointments.length ? (
+        <PaginatedTable
+          data={appointments}
+          columns={[
+            "Sr no.",
+            "Name",
+            "Email",
+            "Phone",
+            "Gender",
+            "Call Type",
+            "Slot Date",
+            "Slot Time",
+          ]}
+          renderRow={(a, index) => (
+            <tr key={a._id}>
+              <td>{index + 1}</td>
+              <td>
+                {a.firstName} {a.lastName}
+              </td>
+              <td>{a.email}</td>
+              <td>{a.mobile}</td>
+              <td>{a.gender}</td>
+              <td>{a.callType}</td>
+              <td>{a.slotDate}</td>
+              <td>{a.slotTime}</td>
+            </tr>
+          )}
+        />
+      ) : (
+        <p>No appointments found.</p>
+      )}
+    </TableWrapper>
   );
 }
 
 function ProgramsPage({ enrollments, setView }) {
   return (
-    <div>
-      <h3 className="mb-3">Program Enrollments</h3>
+    <TableWrapper
+      title="Program Enrollments"
+      setView={setView}
+      addBtn={{ label: "Add Program", onClick: () => setView("addProgram") }}
+    >
       {enrollments.length ? (
-        <div style={{ overflowY: "auto" }}>
-          <table className="table table-striped table-hover">
-            <thead className="table-dark">
-              <tr>
-                <th>Sr no.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Gender</th>
-                <th>Program</th>
-              </tr>
-            </thead>
-            <tbody>
-              {enrollments.map((e, index) => (
-                <tr key={e._id}>
-                  <td>{index + 1}</td>
-                  <td>{e.firstName} {e.lastName}</td>
-                  <td>{e.email}</td>
-                  <td>{e.mobile}</td>
-                  <td>{e.gender}</td>
-                  <td>{e.program || "N/A"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : <p>No enrollments found.</p>}
-
-      <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
-        ← Back
-      </button>
-    </div>
+        <PaginatedTable
+          data={enrollments}
+          columns={["Sr no.", "Name", "Email", "Phone", "Gender", "Program"]}
+          renderRow={(e, index) => (
+            <tr key={e._id}>
+              <td>{index + 1}</td>
+              <td>
+                {e.firstName} {e.lastName}
+              </td>
+              <td>{e.email}</td>
+              <td>{e.mobile}</td>
+              <td>{e.gender}</td>
+              <td>{e.program || "N/A"}</td>
+            </tr>
+          )}
+        />
+      ) : (
+        <p>No enrollments found.</p>
+      )}
+    </TableWrapper>
   );
 }
 
 function DoctorsPage({ setView }) {
   const [doctors, setDoctors] = useState(
-    initialDoctors.map(d => ({ ...d, status: d.status || "unset" }))
+    initialDoctors.map((d) => ({ ...d, status: d.status || "unset" }))
   );
   const [editDoctor, setEditDoctor] = useState(null);
 
   const updateDoctorStatus = async (id, status) => {
-    const updated = doctors.map(doc =>
+    const updated = doctors.map((doc) =>
       doc.id === id ? { ...doc, status } : doc
     );
     setDoctors(updated);
-
     await fetch(`/api/admin/doctors/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -116,12 +174,11 @@ function DoctorsPage({ setView }) {
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    const updated = doctors.map(doc =>
+    const updated = doctors.map((doc) =>
       doc.id === editDoctor.id ? editDoctor : doc
     );
     setDoctors(updated);
     setEditDoctor(null);
-
     await fetch(`/api/admin/doctors/${editDoctor.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -136,89 +193,87 @@ function DoctorsPage({ setView }) {
   };
 
   return (
-    <div>
-      <h3 className="mb-3">Doctors List</h3>
-      <div style={{ overflowY: "auto" }}>
-        <table className="table table-hover align-middle">
-          <thead className="table-dark">
-            <tr>
-              <th>Sr no.</th>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>Specialization</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {doctors.map((doc, index) => (
-              <motion.tr
-                key={doc.id}
-                whileHover={{ backgroundColor: "#f8f9fa" }}
-                transition={{ duration: 0.2 }}
-              >
-                <td>{index + 1}</td>
-                <td>
-                  <img
-                    src={doc.photo}
-                    alt={doc.name}
-                    style={{
-                      width: "60px",
-                      height: "60px",
-                      objectFit: "cover",
-                      borderRadius: "6px",
-                      border: borderColor(doc.status),
-                    }}
-                  />
-                </td>
-                <td>{doc.name}</td>
-                <td>{doc.specialization}</td>
-                <td>{doc.email}</td>
-                <td>{doc.phone}</td>
-                <td>
-                  <div className="dropdown">
+    <TableWrapper
+      title="Doctors List"
+      setView={setView}
+      addBtn={{ label: "Add Doctor", onClick: () => setView("addDoctor") }}
+    >
+      <PaginatedTable
+        data={doctors}
+        columns={[
+          "Sr no.",
+          "Photo",
+          "Name",
+          "Specialization",
+          "Email",
+          "Phone",
+          "Actions",
+        ]}
+        renderRow={(doc, index) => (
+          <motion.tr
+            key={doc.id}
+            whileHover={{ backgroundColor: "#f8f9fa" }}
+            transition={{ duration: 0.2 }}
+          >
+            <td>{index + 1}</td>
+            <td>
+              <img
+                src={doc.photo}
+                alt={doc.name}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  objectFit: "cover",
+                  borderRadius: "6px",
+                  border: borderColor(doc.status),
+                }}
+              />
+            </td>
+            <td>{doc.name}</td>
+            <td>{doc.specialization}</td>
+            <td>{doc.email}</td>
+            <td>{doc.phone}</td>
+            <td>
+              <div className="dropdown">
+                <button
+                  className="btn btn-light dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  ⋮
+                </button>
+                <ul className="dropdown-menu">
+                  <li>
                     <button
-                      className="btn btn-light dropdown-toggle"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
+                      className="dropdown-item text-success"
+                      onClick={() => updateDoctorStatus(doc.id, "active")}
                     >
-                      ⋮
+                      Active
                     </button>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <button
-                          className="dropdown-item text-success"
-                          onClick={() => updateDoctorStatus(doc.id, "active")}
-                        >
-                          Active
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="dropdown-item text-danger"
-                          onClick={() => updateDoctorStatus(doc.id, "inactive")}
-                        >
-                          Inactive
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="dropdown-item text-warning"
-                          onClick={() => setEditDoctor({ ...doc })}
-                        >
-                          Edit Details
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item text-danger"
+                      onClick={() => updateDoctorStatus(doc.id, "inactive")}
+                    >
+                      Inactive
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item text-warning"
+                      onClick={() => setEditDoctor({ ...doc })}
+                    >
+                      Edit Details
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </motion.tr>
+        )}
+      />
 
       {editDoctor && (
         <div className="modal show d-block" tabIndex="-1" role="dialog">
@@ -240,7 +295,10 @@ function DoctorsPage({ setView }) {
                   className="form-control mb-2"
                   value={editDoctor.specialization}
                   onChange={(e) =>
-                    setEditDoctor({ ...editDoctor, specialization: e.target.value })
+                    setEditDoctor({
+                      ...editDoctor,
+                      specialization: e.target.value,
+                    })
                   }
                   placeholder="Specialization"
                 />
@@ -279,49 +337,30 @@ function DoctorsPage({ setView }) {
           </div>
         </div>
       )}
-
-      <button className="btn btn-danger mb-3 mt-3" onClick={() => setView("home")}>
-        ← Back
-      </button>
-    </div>
+    </TableWrapper>
   );
 }
 
 function FeedbackPage({ setView }) {
   return (
-    <div>
-      <h3 className="mb-3">User Feedbacks</h3>
-      <div style={{ overflowY: "auto" }}>
-        <table className="table table-hover align-middle">
-          <thead className="table-dark">
-            <tr>
-              <th>Sr no.</th>
-              <th>Name</th>
-              <th>Review</th>
-              <th>Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {feedbackData.map((fb, index) => (
-              <motion.tr
-                key={index}
-                whileHover={{ backgroundColor: "#f8f9fa"}}
-                transition={{ duration: 0.2 }}
-              >
-                <td>{index + 1}</td>
-                <td>{fb.name}</td>
-                <td>"{fb.review}"</td>
-                <td>{"⭐".repeat(fb.rating)}</td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <button className="btn btn-danger mb-3" onClick={() => setView("home")}>
-        ← Back
-      </button>
-    </div>
+    <TableWrapper title="User Feedbacks" setView={setView}>
+      <PaginatedTable
+        data={feedbackData}
+        columns={["Sr no.", "Name", "Review", "Rating"]}
+        renderRow={(fb, index) => (
+          <motion.tr
+            key={index}
+            whileHover={{ backgroundColor: "#f8f9fa" }}
+            transition={{ duration: 0.2 }}
+          >
+            <td>{index + 1}</td>
+            <td>{fb.name}</td>
+            <td>"{fb.review}"</td>
+            <td>{"⭐".repeat(fb.rating)}</td>
+          </motion.tr>
+        )}
+      />
+    </TableWrapper>
   );
 }
 
@@ -330,6 +369,7 @@ function AdminDashboard() {
   const [appointments, setAppointments] = useState([]);
   const [enrollments, setEnrollments] = useState([]);
   const [error, setError] = useState("");
+
   const token = localStorage.getItem("adminToken");
 
   useEffect(() => {
@@ -343,9 +383,7 @@ function AdminDashboard() {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
-
         if (!appRes.ok || !enrollRes.ok) throw new Error("Failed to load data");
-
         setAppointments(await appRes.json());
         setEnrollments(await enrollRes.json());
       } catch (err) {
@@ -353,16 +391,38 @@ function AdminDashboard() {
         setError("Failed to load admin data.");
       }
     };
-
     fetchData();
   }, [token]);
 
-  // card list with icons
   const dashboardItems = [
-    { label: "Appointments", count: appointments.length, viewKey: "appointments", icon: <FaCalendarAlt />, color: "#007bff" },
-    { label: "Programs", count: enrollments.length, viewKey: "programs", icon: <FaBook />, color: "#28a745" },
-    { label: "Doctors", count: initialDoctors.length, viewKey: "doctors", icon: <FaUserMd />, color: "#ffc107" },
-    { label: "Feedbacks", count: feedbackData.length, viewKey: "feedback", icon: <FaComments />, color: "#dc3545" },
+    {
+      label: "Appointments",
+      count: appointments.length,
+      viewKey: "appointments",
+      icon: <FaCalendarAlt />,
+      color: "#007bff",
+    },
+    {
+      label: "Programs",
+      count: enrollments.length,
+      viewKey: "programs",
+      icon: <FaBook />,
+      color: "#28a745",
+    },
+    {
+      label: "Doctors",
+      count: initialDoctors.length,
+      viewKey: "doctors",
+      icon: <FaUserMd />,
+      color: "#ffc107",
+    },
+    {
+      label: "Feedbacks",
+      count: feedbackData.length,
+      viewKey: "feedback",
+      icon: <FaComments />,
+      color: "#dc3545",
+    },
   ];
 
   return (
@@ -389,7 +449,10 @@ function AdminDashboard() {
                       transition={{ duration: 0.2 }}
                       onClick={() => setView(item.viewKey)}
                     >
-                      <div className="dashboard-card-icon me-3" style={{ color: item.color }}>
+                      <div
+                        className="dashboard-card-icon me-3"
+                        style={{ color: item.color }}
+                      >
                         {item.icon}
                       </div>
                       <div className="text-start">
@@ -402,8 +465,12 @@ function AdminDashboard() {
               </div>
             </>
           )}
-          {view === "appointments" && <AppointmentsPage appointments={appointments} setView={setView} />}
-          {view === "programs" && <ProgramsPage enrollments={enrollments} setView={setView} />}
+          {view === "appointments" && (
+            <AppointmentsPage appointments={appointments} setView={setView} />
+          )}
+          {view === "programs" && (
+            <ProgramsPage enrollments={enrollments} setView={setView} />
+          )}
           {view === "doctors" && <DoctorsPage setView={setView} />}
           {view === "feedback" && <FeedbackPage setView={setView} />}
           {view === "addProgram" && <AddProgramForm />}
