@@ -10,7 +10,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./adminDashboard.css";
 import { FaCalendarAlt, FaBook, FaUserMd, FaComments, FaUser, FaPlus } from "react-icons/fa";
 
-// ✅ Reusable wrapper for all pages
 function TableWrapper({ title, children, setView, addBtn }) {
   return (
     <div className="card shadow p-4 mb-4" style={{ borderRadius: "10px" }}>
@@ -18,8 +17,7 @@ function TableWrapper({ title, children, setView, addBtn }) {
         <h3 className="m-0">{title}</h3>
         {addBtn && (
           <button
-            className="btn btn-success btn-sm d-flex align-items-center px-3 py-1"
-            style={{ width: "auto" }}
+            className="btn btn-success btn-sm d-flex align-items-center"
             onClick={addBtn.onClick}
           >
             <FaPlus className="me-2" /> {addBtn.label}
@@ -28,7 +26,7 @@ function TableWrapper({ title, children, setView, addBtn }) {
       </div>
       {children}
       <button
-        className="btn btn-danger mt-4 w-100"
+        className="btn btn-danger mt-4"
         onClick={() => setView("home")}
       >
         ← Back
@@ -37,14 +35,12 @@ function TableWrapper({ title, children, setView, addBtn }) {
   );
 }
 
-// ✅ Reusable Table with Pagination (5 rows per page)
 function PaginatedTable({ data, columns, renderRow }) {
   const [page, setPage] = useState(1);
-  const rowsPerPage = 5;
-  const totalPages = Math.ceil(data.length / rowsPerPage);
-
-  const startIndex = (page - 1) * rowsPerPage;
-  const paginatedData = data.slice(startIndex, startIndex + rowsPerPage);
+  const itemsPerPage = 5;
+  const startIndex = (page - 1) * itemsPerPage;
+  const pageData = data.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
 
   return (
     <>
@@ -52,30 +48,30 @@ function PaginatedTable({ data, columns, renderRow }) {
         <table className="table table-bordered table-hover align-middle">
           <thead className="bg-light">
             <tr className="fw-bold text-secondary">
-              {columns.map((col, idx) => (
-                <th key={idx}>{col}</th>
+              {columns.map((col, i) => (
+                <th key={i}>{col}</th>
               ))}
             </tr>
           </thead>
-          <tbody>{paginatedData.map(renderRow)}</tbody>
+          <tbody>
+            {pageData.map((item, idx) => renderRow(item, startIndex + idx + 1))}
+          </tbody>
         </table>
       </div>
-      {data.length > rowsPerPage && (
+      {data.length > itemsPerPage && (
         <div className="d-flex justify-content-end align-items-center mt-2">
           <button
             className="btn btn-light btn-sm me-2"
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
+            onClick={() => setPage(page - 1)}
           >
             ← Prev
           </button>
-          <span className="me-2">
-            Page {page} of {totalPages}
-          </span>
+          <span className="me-2">Page {page} of {totalPages}</span>
           <button
             className="btn btn-light btn-sm"
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
+            onClick={() => setPage(page + 1)}
           >
             Next →
           </button>
@@ -92,21 +88,13 @@ function AppointmentsPage({ appointments, setView }) {
         <PaginatedTable
           data={appointments}
           columns={[
-            "Sr no.",
-            "Name",
-            "Email",
-            "Phone",
-            "Gender",
-            "Call Type",
-            "Slot Date",
-            "Slot Time",
+            "Sr no.", "Name", "Email", "Phone", "Gender",
+            "Call Type", "Slot Date", "Slot Time"
           ]}
-          renderRow={(a, index) => (
+          renderRow={(a, sr) => (
             <tr key={a._id}>
-              <td>{index + 1}</td>
-              <td>
-                {a.firstName} {a.lastName}
-              </td>
+              <td>{sr}</td>
+              <td>{a.firstName} {a.lastName}</td>
               <td>{a.email}</td>
               <td>{a.mobile}</td>
               <td>{a.gender}</td>
@@ -134,12 +122,10 @@ function ProgramsPage({ enrollments, setView }) {
         <PaginatedTable
           data={enrollments}
           columns={["Sr no.", "Name", "Email", "Phone", "Gender", "Program"]}
-          renderRow={(e, index) => (
+          renderRow={(e, sr) => (
             <tr key={e._id}>
-              <td>{index + 1}</td>
-              <td>
-                {e.firstName} {e.lastName}
-              </td>
+              <td>{sr}</td>
+              <td>{e.firstName} {e.lastName}</td>
               <td>{e.email}</td>
               <td>{e.mobile}</td>
               <td>{e.gender}</td>
@@ -200,22 +186,14 @@ function DoctorsPage({ setView }) {
     >
       <PaginatedTable
         data={doctors}
-        columns={[
-          "Sr no.",
-          "Photo",
-          "Name",
-          "Specialization",
-          "Email",
-          "Phone",
-          "Actions",
-        ]}
-        renderRow={(doc, index) => (
+        columns={["Sr no.", "Photo", "Name", "Specialization", "Email", "Phone", "Actions"]}
+        renderRow={(doc, sr) => (
           <motion.tr
             key={doc.id}
             whileHover={{ backgroundColor: "#f8f9fa" }}
             transition={{ duration: 0.2 }}
           >
-            <td>{index + 1}</td>
+            <td>{sr}</td>
             <td>
               <img
                 src={doc.photo}
@@ -347,13 +325,13 @@ function FeedbackPage({ setView }) {
       <PaginatedTable
         data={feedbackData}
         columns={["Sr no.", "Name", "Review", "Rating"]}
-        renderRow={(fb, index) => (
+        renderRow={(fb, sr) => (
           <motion.tr
-            key={index}
+            key={sr}
             whileHover={{ backgroundColor: "#f8f9fa" }}
             transition={{ duration: 0.2 }}
           >
-            <td>{index + 1}</td>
+            <td>{sr}</td>
             <td>{fb.name}</td>
             <td>"{fb.review}"</td>
             <td>{"⭐".repeat(fb.rating)}</td>
