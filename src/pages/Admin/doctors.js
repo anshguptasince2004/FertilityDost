@@ -6,7 +6,7 @@ const doctors = [
     phone: "+91 9876543210",
     specialization: "Andrologist",
     photo: "https://randomuser.me/api/portraits/women/44.jpg",
-    status: "grey"
+    status: "unset"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const doctors = [
     phone: "+91 9123456789",
     specialization: "Andrologist",
     photo: "https://randomuser.me/api/portraits/men/32.jpg",
-    status: "grey"
+    status: "unset"
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const doctors = [
     phone: "+91 9812345678",
     specialization: "Fertility Specialist",
     photo: "https://randomuser.me/api/portraits/women/12.jpg",
-    status: "grey"
+    status: "unset"
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const doctors = [
     phone: "+91 9123456789",
     specialization: "Andrologist",
     photo: "https://randomuser.me/api/portraits/men/28.jpg",
-    status: "grey"
+    status: "unset"
   }
 ];
 

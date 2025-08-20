@@ -25,10 +25,7 @@ function TableWrapper({ title, children, setView, addBtn }) {
         )}
       </div>
       {children}
-      <button
-        className="btn btn-danger mt-4"
-        onClick={() => setView("home")}
-      >
+      <button className="btn btn-danger mt-4" onClick={() => setView("home")}>
         ← Back
       </button>
     </div>
@@ -44,10 +41,10 @@ function PaginatedTable({ data, columns, renderRow }) {
 
   return (
     <>
-      <div className="table-responsive">
-        <table className="table table-bordered table-hover align-middle">
+      <div className="table-responsive d-flex justify-content-center">
+        <table className="table table-bordered table-hover align-middle custom-table">
           <thead className="bg-light">
-            <tr className="fw-bold text-secondary">
+            <tr className="fw-bold text-secondary text-center">
               {columns.map((col, i) => (
                 <th key={i}>{col}</th>
               ))}
@@ -92,7 +89,7 @@ function AppointmentsPage({ appointments, setView }) {
             "Call Type", "Slot Date", "Slot Time"
           ]}
           renderRow={(a, sr) => (
-            <tr key={a._id}>
+            <tr key={a._id} className="text-center">
               <td>{sr}</td>
               <td>{a.firstName} {a.lastName}</td>
               <td>{a.email}</td>
@@ -123,7 +120,7 @@ function ProgramsPage({ enrollments, setView }) {
           data={enrollments}
           columns={["Sr no.", "Name", "Email", "Phone", "Gender", "Program"]}
           renderRow={(e, sr) => (
-            <tr key={e._id}>
+            <tr key={e._id} className="text-center">
               <td>{sr}</td>
               <td>{e.firstName} {e.lastName}</td>
               <td>{e.email}</td>
@@ -172,12 +169,6 @@ function DoctorsPage({ setView }) {
     });
   };
 
-  const borderColor = (status) => {
-    if (status === "active") return "2.5px solid green";
-    if (status === "inactive") return "2.5px solid red";
-    return "2.5px solid gray";
-  };
-
   return (
     <TableWrapper
       title="Doctors List"
@@ -186,10 +177,13 @@ function DoctorsPage({ setView }) {
     >
       <PaginatedTable
         data={doctors}
-        columns={["Sr no.", "Photo", "Name", "Specialization", "Email", "Phone", "Actions"]}
+        columns={[
+          "Sr no.", "Photo", "Name", "Specialization", "Email", "Phone", "Status", "Actions"
+        ]}
         renderRow={(doc, sr) => (
           <motion.tr
             key={doc.id}
+            className="text-center"
             whileHover={{ backgroundColor: "#f8f9fa" }}
             transition={{ duration: 0.2 }}
           >
@@ -199,11 +193,9 @@ function DoctorsPage({ setView }) {
                 src={doc.photo}
                 alt={doc.name}
                 style={{
-                  width: "60px",
-                  height: "60px",
+                  width: "50px",
+                  height: "50px",
                   objectFit: "cover",
-                  borderRadius: "6px",
-                  border: borderColor(doc.status),
                 }}
               />
             </td>
@@ -211,6 +203,11 @@ function DoctorsPage({ setView }) {
             <td>{doc.specialization}</td>
             <td>{doc.email}</td>
             <td>{doc.phone}</td>
+            <td>
+              {doc.status === "active" && <span className="text-success">Active</span>}
+              {doc.status === "inactive" && <span className="text-danger">Inactive</span>}
+              {doc.status === "unset" && <span className="text-muted">Not Set</span>}
+            </td>
             <td>
               <div className="dropdown">
                 <button
@@ -328,6 +325,7 @@ function FeedbackPage({ setView }) {
         renderRow={(fb, sr) => (
           <motion.tr
             key={sr}
+            className="text-center"
             whileHover={{ backgroundColor: "#f8f9fa" }}
             transition={{ duration: 0.2 }}
           >
