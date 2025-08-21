@@ -34,7 +34,7 @@ function TableWrapper({ title, children, setView, addBtn }) {
 
 function PaginatedTable({ data, columns, renderRow }) {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
   const startIndex = (page - 1) * itemsPerPage;
   const pageData = data.slice(startIndex, startIndex + itemsPerPage);
   const totalPages = Math.ceil(data.length / itemsPerPage);
