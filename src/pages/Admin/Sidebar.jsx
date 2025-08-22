@@ -9,7 +9,7 @@ const Sidebar = ({ setView, activeView }) => {
   const menuItems = [
     { label: "Dashboard", view: "home", icon: <FaHome /> },
     { label: "Add Program", view: "addProgram", icon: <FaPlusCircle /> },
-    { label: "Add Doctor", view: "addDoctor", icon: <FaUserMd /> },
+    { label: "Doctors List", view: "doctors", icon: <FaUserMd /> },
     {
       label: "CMS",
       icon: <FaDatabase />,
@@ -47,9 +47,7 @@ const Sidebar = ({ setView, activeView }) => {
                 activeView === item.view || parentActive ? "active" : ""
               }`}
               onClick={() =>
-                hasChildren
-                  ? toggleMenu(item.label)
-                  : setView(item.view)
+                hasChildren ? toggleMenu(item.label) : setView(item.view)
               }
             >
               <div className="sidebar-item-left">
@@ -64,6 +62,7 @@ const Sidebar = ({ setView, activeView }) => {
             </li>
           );
         })}
+
         {menuItems.map(
           (item) =>
             item.children &&
