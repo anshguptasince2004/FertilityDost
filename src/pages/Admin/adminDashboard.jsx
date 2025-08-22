@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import initialDoctors from "./doctors";
 import feedbackData from "./feedbacks";
+import appointmentsData from "./appointments.json"; // ⬅️ import demo JSON
+import programsData from "./programs.json"; // ⬅️ import demo JSON
 import AddProgramForm from "./AddProgramForm";
 import AddVideoForm from "./AddVideoForm";
 import AddDoctorForm from "./AddDoctorForm";
@@ -40,7 +42,7 @@ function TableWrapper({ title, children, setView, addBtn }) {
 
 function PaginatedTable({ data, columns, renderRow }) {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 10; // show up to 10 rows per page
+  const itemsPerPage = 10; 
   const startIndex = (page - 1) * itemsPerPage;
   const pageData = data.slice(startIndex, startIndex + itemsPerPage);
   const totalPages = Math.ceil(Math.max(1, data.length) / itemsPerPage);
@@ -58,7 +60,6 @@ function PaginatedTable({ data, columns, renderRow }) {
           </thead>
           <tbody>
             {pageData.map((item, idx) => renderRow(item, startIndex + idx + 1))}
-            {/* pad empty rows so the table area height stays consistent even if < 10 rows */}
             {pageData.length < itemsPerPage &&
               Array.from({ length: itemsPerPage - pageData.length }).map((_, i) => (
                 <tr key={`pad-${i}`} className="invisible-row">
@@ -97,30 +98,33 @@ function PaginatedTable({ data, columns, renderRow }) {
 function AppointmentsPage({ appointments, setView }) {
   return (
     <TableWrapper title="Appointments" setView={setView}>
-      {appointments.length ? (
-        <PaginatedTable
-          data={appointments}
-          columns={["Sr no.", "Name", "Email", "Phone", "Gender", "Call Type", "Slot Date", "Slot Time"]}
-          renderRow={(a, sr) => (
-            <tr key={a._id || sr} className="text-center">
-              <td>{sr}</td>
-              <td>{a.firstName} {a.lastName}</td>
-              <td>{a.email}</td>
-              <td>{a.mobile}</td>
-              <td>{a.gender}</td>
-              <td>{a.callType}</td>
-              <td>{a.slotDate}</td>
-              <td>{a.slotTime}</td>
-            </tr>
-          )}
-        />
-      ) : (
-        <PaginatedTable
-          data={[]}
-          columns={["Sr no.", "Name", "Email", "Phone", "Gender", "Call Type", "Slot Date", "Slot Time"]}
-          renderRow={() => null}
-        />
-      )}
+      <PaginatedTable
+        data={appointments}
+        columns={[
+          "Sr no.",
+          "Name",
+          "Email",
+          "Phone",
+          "Gender",
+          "Call Type",
+          "Doctor Assigned",
+          "Slot Date",
+          "Slot Time",
+        ]}
+        renderRow={(a, sr) => (
+          <tr key={a.SrNo || sr} className="text-center">
+            <td>{sr}</td>
+            <td>{a.Name}</td>
+            <td>{a.Email}</td>
+            <td>{a.Phone}</td>
+            <td>{a.Gender}</td>
+            <td>{a.CallType}</td>
+            <td>{a.DoctorAssigned}</td>
+            <td>{a.SlotDate}</td>
+            <td>{a.SlotTime}</td>
+          </tr>
+        )}
+      />
     </TableWrapper>
   );
 }
@@ -132,31 +136,31 @@ function ProgramsPage({ enrollments, setView }) {
       setView={setView}
       addBtn={{ label: "Add Program", onClick: () => setView("addProgram") }}
     >
-      {enrollments.length ? (
-        <PaginatedTable
-          data={enrollments}
-          columns={["Sr no.", "Name", "Email", "Phone", "Gender", "Program"]}
-          renderRow={(e, sr) => (
-            <tr key={e._id || sr} className="text-center">
-              <td>{sr}</td>
-              <td>{e.firstName} {e.lastName}</td>
-              <td>{e.email}</td>
-              <td>{e.mobile}</td>
-              <td>{e.gender}</td>
-              <td>{e.program || "N/A"}</td>
-            </tr>
-          )}
-        />
-      ) : (
-        <PaginatedTable
-          data={[]}
-          columns={["Sr no.", "Name", "Email", "Phone", "Gender", "Program"]}
-          renderRow={() => null}
-        />
-      )}
+      <PaginatedTable
+        data={enrollments}
+        columns={[
+          "Sr no.",
+          "Name",
+          "Email",
+          "Phone",
+          "Gender",
+          "Program Section",
+        ]}
+        renderRow={(e, sr) => (
+          <tr key={e.SrNo || sr} className="text-center">
+            <td>{sr}</td>
+            <td>{e.Name}</td>
+            <td>{e.Email}</td>
+            <td>{e.Phone}</td>
+            <td>{e.Gender}</td>
+            <td>{e.ProgramSection}</td>
+          </tr>
+        )}
+      />
     </TableWrapper>
   );
 }
+
 
 function DoctorsPage({ setView }) {
   const [doctors, setDoctors] = useState(
@@ -167,11 +171,6 @@ function DoctorsPage({ setView }) {
   const updateDoctorStatus = async (id, status) => {
     const updated = doctors.map((doc) => (doc.id === id ? { ...doc, status } : doc));
     setDoctors(updated);
-    await fetch(`/api/admin/doctors/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
-    });
   };
 
   const handleEditSubmit = async (e) => {
@@ -179,11 +178,6 @@ function DoctorsPage({ setView }) {
     const updated = doctors.map((doc) => (doc.id === editDoctor.id ? editDoctor : doc));
     setDoctors(updated);
     setEditDoctor(null);
-    await fetch(`/api/admin/doctors/${editDoctor.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(editDoctor),
-    });
   };
 
   return (
@@ -302,7 +296,7 @@ function DoctorsPage({ setView }) {
 
 function FeedbackPage({ setView }) {
   const [reviews, setReviews] = useState(feedbackData);
-  const [editReview, setEditReview] = useState(null); // { index, name, review, rating }
+  const [editReview, setEditReview] = useState(null);
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
@@ -382,12 +376,11 @@ function FeedbackPage({ setView }) {
 
 function AdminDashboard() {
   const [view, setView] = useState("home");
-  const [appointments, setAppointments] = useState([]);
-  const [enrollments, setEnrollments] = useState([]);
-  const [error, setError] = useState("");
+  const [appointments, setAppointments] = useState(appointmentsData); // ⬅️ load from JSON
+  const [enrollments, setEnrollments] = useState(programsData); // ⬅️ load from JSON
 
-  const token = localStorage.getItem("adminToken");
-
+  // Commented out backend fetch logic
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -409,6 +402,7 @@ function AdminDashboard() {
     };
     fetchData();
   }, [token]);
+  */
 
   const dashboardItems = [
     { label: "Appointments", count: appointments.length, viewKey: "appointments", icon: <FaCalendarAlt />, color: "#007bff" },
