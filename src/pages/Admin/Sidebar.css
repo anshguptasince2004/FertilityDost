@@ -24,16 +24,19 @@
   flex: 1;
 }
 
-.sidebar-item {
+.sidebar-item,
+.sidebar-subitem {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-size: 0.9rem;
 }
 
-.sidebar-item:hover {
+.sidebar-item:hover,
+.sidebar-subitem:hover {
   background-color: #840303ff;
 }
 
@@ -57,4 +60,33 @@
 
 .sidebar-arrow {
   font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-arrow.rotate {
+  transform: rotate(90deg);
+}
+
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.sidebar-logo img {
+  width: 120px;
+  height: auto;
+}
+
+.sidebar-submenu {
+  list-style: none;
+  padding-left: 40px;
+  margin: 0;
+}
+.sidebar-subitem.active {
+  background-color: #840303ff;
+}
+
+.sidebar-item-left {
+  font-size: 0.8rem;
 }
