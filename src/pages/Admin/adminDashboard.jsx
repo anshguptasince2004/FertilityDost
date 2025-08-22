@@ -218,7 +218,7 @@ function DoctorsPage({ setView }) {
                 <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   ⋮
                 </button>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu" style={{ minWidth: "6rem", fontSize: "0.9rem" }}>
                   <li>
                     <button className="dropdown-item text-success" onClick={() => updateDoctorStatus(doc.id, "active")}>
                       Active
