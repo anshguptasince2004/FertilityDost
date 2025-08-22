@@ -36,13 +36,20 @@
 }
 
 .sidebar-item:hover,
-.sidebar-subitem:hover {
+.sidebar-submenu:hover {
   background-color: #840303ff;
 }
 
-.sidebar-item.active,
-.sidebar-subitem.active {
+.sidebar-item.active {
   background-color: #840303ff;
+}
+
+.sidebar-submenu.active {
+  background-color: #840303ff;
+}
+
+.sidebar-subitem.active {
+  text-decoration: underline;
 }
 
 .sidebar-item-left {
@@ -57,6 +64,14 @@
 
 .sidebar-label {
   font-size: 1rem;
+}
+
+.sidebar-sub-label {
+  font-size: 0.9rem;
+}
+
+.sidebar-subitem {
+  padding: 8px 20px;
 }
 
 .sidebar-arrow {

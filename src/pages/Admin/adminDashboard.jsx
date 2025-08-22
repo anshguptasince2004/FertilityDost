@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import initialDoctors from "./doctors";
 import feedbackData from "./feedbacks";
-import appointmentsData from "./appointments.json"; // ⬅️ import demo JSON
-import programsData from "./programs.json"; // ⬅️ import demo JSON
+import appointmentsData from "./appointments.json";
+import programsData from "./programs.json";
 import AddProgramForm from "./AddProgramForm";
 import AddVideoForm from "./AddVideoForm";
 import AddDoctorForm from "./AddDoctorForm";
@@ -42,7 +42,7 @@ function TableWrapper({ title, children, setView, addBtn }) {
 
 function PaginatedTable({ data, columns, renderRow }) {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 10; 
+  const itemsPerPage = 10;
   const startIndex = (page - 1) * itemsPerPage;
   const pageData = data.slice(startIndex, startIndex + itemsPerPage);
   const totalPages = Math.ceil(Math.max(1, data.length) / itemsPerPage);
@@ -374,35 +374,36 @@ function FeedbackPage({ setView }) {
   );
 }
 
+// Commented out backend fetch logic
+/*
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const [appRes, enrollRes] = await Promise.all([
+        fetch("/api/admin/appointments", {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        fetch("/api/admin/enrollments", {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
+      if (!appRes.ok || !enrollRes.ok) throw new Error("Failed to load data");
+      setAppointments(await appRes.json());
+      setEnrollments(await enrollRes.json());
+    } catch (err) {
+      console.error("Dashboard fetch error:", err);
+      setError("Failed to load admin data.");
+    }
+  };
+  fetchData();
+}, [token]);
+*/
+
 function AdminDashboard() {
   const [view, setView] = useState("home");
-  const [appointments, setAppointments] = useState(appointmentsData); // ⬅️ load from JSON
-  const [enrollments, setEnrollments] = useState(programsData); // ⬅️ load from JSON
-
-  // Commented out backend fetch logic
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [appRes, enrollRes] = await Promise.all([
-          fetch("/api/admin/appointments", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          fetch("/api/admin/enrollments", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
-        if (!appRes.ok || !enrollRes.ok) throw new Error("Failed to load data");
-        setAppointments(await appRes.json());
-        setEnrollments(await enrollRes.json());
-      } catch (err) {
-        console.error("Dashboard fetch error:", err);
-        setError("Failed to load admin data.");
-      }
-    };
-    fetchData();
-  }, [token]);
-  */
+  const [appointments, setAppointments] = useState(appointmentsData);
+  const [enrollments, setEnrollments] = useState(programsData);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dashboardItems = [
     { label: "Appointments", count: appointments.length, viewKey: "appointments", icon: <FaCalendarAlt />, color: "#007bff" },
@@ -413,14 +414,32 @@ function AdminDashboard() {
 
   return (
     <div className="dashboard-wrapper">
-      <Sidebar setView={setView} activeView={view} />
+
+      <div className={`sidebar-wrapper ${sidebarOpen ? "open" : ""}`}>
+        <Sidebar
+          setView={setView}
+          activeView={view}
+          onClose={() => setSidebarOpen(false)}
+        />
+      </div>
+
+
+
       <div className="main-content p-0">
-        <header className="d-flex justify-content-end align-items-center px-4 py-2 bg-white shadow-sm">
-          <span className="me-3">Hello, Admin</span>
+        <header className="d-flex justify-content-between align-items-center px-4 py-2 bg-white shadow-sm">
+
+          <button
+            className="btn btn-outline-dark d-md-none me-2"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            ☰
+          </button>
+          <span className="ms-auto me-3">Hello, Admin</span>
           <button className="btn btn-light rounded-circle">
             <FaUser />
           </button>
         </header>
+
         <div className="p-4">
           {view === "home" && (
             <>
@@ -460,5 +479,6 @@ function AdminDashboard() {
     </div>
   );
 }
+
 
 export default AdminDashboard;
