@@ -11,7 +11,7 @@ const Sidebar = ({ setView, activeView }) => {
     { label: "Add Program", view: "addProgram", icon: <FaPlusCircle /> },
     { label: "Doctors List", view: "doctors", icon: <FaUserMd /> },
     {
-      label: "CMS",
+      label: "CMS Section",
       icon: <FaDatabase />,
       children: [
         { label: "Add Video", view: "addVideo", icon: <FaVideo /> },
